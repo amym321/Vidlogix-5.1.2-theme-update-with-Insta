@@ -10,6 +10,7 @@
 
   assign variants_total = product.variants | size
 
+
   case image_container_width
     when 'small'
       assign product_image_width = 'medium-up--two-fifths'
@@ -38,6 +39,7 @@
   assign protection_product = settings.protection_product
 -%}
 
+
 <div id="ProductSection-{{ section_id }}-{{ product.id }}"
   class="product-section"
   data-section-id="{{ section_id }}"
@@ -55,7 +57,7 @@
 
   {%- render 'product-template-variables', product: product, current_variant: current_variant -%}
 
-  <div class="page-content page-content--product">
+  <div class=" page-content--product">
     <div class="page-width">
 
       {% comment %} begin code change per 4.1.1 customization {% endcomment %}
@@ -241,13 +243,13 @@
                         <span data-unit-price>{{ current_variant.unit_price | money }}</span>/{{ unit_price_base_unit }}
                       </div>
 
-                      {% comment %} begin code change per 4.1.1 customization {% endcomment %}
-                    {%- if settings.vendor_enable or sku_enable or settings.enable_product_reviews -%}
+                    {% comment %} begin code change per 4.1.1 customization {% endcomment %}
+                    {%- if settings.vendor_enable or section.settings.sku_enable or settings.enable_product_reviews -%}
 
                     {%- if settings.vendor_enable or section.settings.sku_enable -%}
                       <div class="product-single__vendor-sku-reviews">
                         <div class="product-single__vendor-sku">
-
+        
                           {%- if settings.vendor_enable -%}
                             <div class="product-single__vendor">
                               {%- assign vendor_handle = product.vendor | handleize -%}
@@ -293,12 +295,14 @@
                       </div>
                     {%- endif -%}
 
-                      {% comment %} new field added - am {% endcomment %}                       
-                      {%- if section.settings.condition_new != '' -%}
+                    {% comment %} new field added - am {% endcomment %}                       
+                    {%- if section.settings.condition_new != '' -%}
+                      <div class="product-single__vendor-sku">
                         <div class="product-single__vendor-sku">
-                            <span>{{ section.settings.condition_new }}</span>
+                          <span>{{ section.settings.condition_new }}</span>
                         </div>
-                      {%- endif -%}
+                      </div>
+                    {%- endif -%}
 
                   </div>
 
@@ -340,7 +344,6 @@
                           <span>{{ section.settings.value_two }}</span>
                         </div>
                       {% endif %}
-                      
                     </div>
 
                   {%- when 'variant_picker' -%}
@@ -495,7 +498,7 @@
 
       {% comment %} SellerBIRD Bundles - am {% endcomment %}
       <div class="sb-bundle-container"></div>
-
+      
       {% comment %} Media Drawer for iframe of user manuals etc - am {% endcomment %}
       {% render 'media-drawer' %}
 

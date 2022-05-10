@@ -1,53 +1,47 @@
-{%- liquid
-  assign grid_item_width = 'small--one-half medium-up--one-fifth'
-  assign row_of = 5
+{% comment %} code moved to recently-viewed-snippet for ability to call it from other sections like header - am 
+Calls to this snippet need to quantify the {% endcomment %}
 
-  case section.settings.recent_count
-    when 2
-      assign grid_item_width = 'medium-up--one-half'
-      assign row_of = 2
-    when 3
-      assign grid_item_width = 'small--one-half medium-up--one-third'
-      assign row_of = 3
-    when 4
-      assign grid_item_width = 'small--one-half medium-up--one-quarter'
-      assign row_of = 4
-    when 6
-      assign grid_item_width = 'small--one-half medium-up--one-sixth'
-      assign row_of = 6
-    when 8
-      assign grid_item_width = 'small--one-half medium-up--one-quarter'
-      assign row_of = 4
-  endcase
--%}
+{% assign recent_view_section = true %}
+{% render 'recently-viewed-snippet', recent_count: section.settings.recent_count, recent_view_section: recent_view_section %}
 
-<div
-  data-subsection
-  data-section-id="{{ section.id }}"
-  data-section-type="recently-viewed"
-  data-product-handle="{{ product.handle }}"
-  data-recent-count="{{ section.settings.recent_count }}"
-  data-grid-item-class="{{ grid_item_width }}"
-  data-row-of="{{ row_of }}">
-  <hr class="hr--large">
-  <div class="index-section index-section--small">
-    <div class="page-width">
-      <header class="section-header">
-        <h3 class="section-header__title">{{ 'products.general.recent_products' | t }}</h3>
-      </header>
-    </div>
+{% style %}
+  .index-section--recently {
+    margin-top: 0;
+  }
+  .index-section--recently .section-header {
+    margin-bottom: 0;
+    text-align: left;
+    padding: 30px 10px;
+  }
+  .index-section--recently .section-header__title {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: var(--typeBasePrimary),var(--typeBaseFallback);
+  }
 
-    <div class="page-width page-width--flush-small">
-      <div class="grid-overflow-wrapper">
-        <div id="RecentlyViewed-{{ section.id }}" class="grid grid--uniform" data-aos="overflow__animation"></div>
-      </div>
-    </div>
-  </div>
-</div>
+  @media screen and (min-width: 769px) {
+    .index-section--recently .section-header__title {
+      font-size: 24px;
+    }
+  }
+
+  .index-section--recently .section-header h3 {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .recently-header  {
+      padding: 0;
+    }
+  }
+  .recent-view-section .grid {
+    padding: 0 10px;
+  }
+{% endstyle %}
 
 {% schema %}
   {
-    "name": "Recently viewed",
+    "name": "Recently Viewed",
     "settings": [
       {
         "type": "paragraph",
@@ -57,7 +51,7 @@
         "type": "range",
         "id": "recent_count",
         "label": "Number of recent products",
-        "default": 5,
+        "default": 4,
         "min": 2,
         "max": 10,
         "step": 1
