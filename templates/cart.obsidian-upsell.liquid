@@ -1,0 +1,287 @@
+{% comment %}
+  This file updates automatically as new features are built.
+  It is best to not edit this file directly.
+
+  When a new version is released, you will find your previous
+  customizations renamed with the extension .backup.liquid.
+  If you'd like to keep these customizations, you can apply
+  them to our updated versions.
+
+  https://text-compare.com/ is a great tool to see the differences.
+{% endcomment %}
+{% layout none %}
+
+{%- assign locale = 'strings_en' -%}
+{%- if request.locale.iso_code == 'fr' -%}
+  {%- assign locale = 'strings_fr' -%}
+{%- elsif request.locale.iso_code == 'es' -%}
+  {%- assign locale = 'strings_es' -%}
+{%- elsif request.locale.iso_code == 'de' -%}
+  {%- assign locale = 'strings_de' -%}
+{%- elsif request.locale.iso_code == 'pt_BR' -%}
+  {%- assign locale = 'strings_pt_BR' -%}
+{%- elsif request.locale.iso_code == 'pt_PT' -%}
+  {%- assign locale = 'strings_pt_PT' -%}
+{%- elsif request.locale.iso_code == 'da' -%}
+  {%- assign locale = 'strings_da' -%}
+{%- elsif request.locale.iso_code == 'nl' -%}
+  {%- assign locale = 'strings_nl' -%}
+{%- elsif request.locale.iso_code == 'it' -%}
+  {%- assign locale = 'strings_it' -%}
+{%- endif -%}
+
+<form action="{{ routes.cart_url }}" method="post" novalidate
+  class="upsell-cart__form"
+  data-cents="{{ cart.total_price }}"
+  data-subtotal="{{ cart.total_price | money_without_currency }}"
+  data-currency="{{ cart.currency.iso_code }}"
+  data-currency-symbol="{{ cart.currency.symbol }}"
+  data-count="{{ cart.item_count }}">
+  <button type="button" class="upsell-cart__close" aria-label="Close cart">
+    <svg aria-hidden="true" focusable="false" role="presentation" class="upsell-icon upsell-icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
+  </button>
+
+  <div class="upsell-cart__items">
+    {% for item in cart.items %}
+      <div class="upsell-cart__item" data-key="{{ item.key }}" data-id="{{ item.product.id }}">
+        {%- assign img_url = item | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <div class="upsell-cart__image">
+          <a href="{{ item.url }}">
+            <img src="{{ item | img_url: '200x200' }}"
+                 width="100" height="100"
+                 loading="lazy"
+                 alt="{{ item.product.title | escape }}">
+          </a>
+        </div>
+        <div class="upsell-cart__item-details">
+          <div class="upsell-cart__item-title">
+            <a href="{{ item.url }}" class="upsell-cart__item-name">
+              {{ item.product.title }}
+            </a>
+            {%- unless item.product.has_only_default_variant -%}
+              <div class="upsell-cart__item--variants">
+                {%- for option in item.options_with_values -%}
+                  <div><span>{{ option.name }}:</span> {{ option.value }}</div>
+                {%- endfor -%}
+              </div>
+            {%- endunless -%}
+            {%- if item.selling_plan_allocation != empty -%}
+              <div class="upsell-cart__item--variants">
+                {{ item.selling_plan_allocation.selling_plan.name }}
+              </div>
+            {%- endif -%}
+            {%- assign property_size = item.properties | size -%}
+            {% if property_size > 0 %}
+              {% for p in item.properties %}
+                {%- assign first_character_in_key = p.first | truncate: 1, '' -%}
+                {% unless p.last == blank or first_character_in_key == '_' %}
+                  <div class="upsell-cart__item--variants">
+                    {{ p.first }}:
+                    {% if p.last contains '/uploads/' %}
+                      <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                    {% else %}
+                      {{ p.last }}
+                    {% endif %}
+                  </div>
+                {% endunless %}
+              {% endfor %}
+            {% endif %}
+          </div>
+          <div class="upsell-cart__item-sub">
+            <div>
+              <div class="upsell-cart__quantity">
+                <label for="cart_updates_{{ item.key }}" class="upsell-visually-hidden">
+                  {{ shop.metafields.obsidian_upsell[locale].line_item_quantity }}
+                </label>
+                <input type="text"
+                  id="cart_updates_{{ item.key }}"
+                  name="updates[]"
+                  class="upsell-cart__quantity-input"
+                  value="{{ item.quantity }}"
+                  pattern="[0-9]*"
+                  data-id="{{ item.key }}">
+                <button type="button" class="upsell-cart__quantity-adjust" data-action="minus">&minus;</button>
+                <button type="button" class="upsell-cart__quantity-adjust" data-action="plus">&plus;</button>
+              </div>
+            </div>
+
+            <div class="upsell-cart__item-price-col text-right">
+              {%- if item.original_price != item.final_price -%}
+                <small class="upsell-cart__price upsell-cart__price--strikethrough">
+                  {{ item.original_price | money }}
+                </small>
+                <span class="upsell-cart__price upsell-cart__discount">
+                  {{ item.final_price | money }}
+                </span>
+              {%- elsif item.variant.compare_at_price and item.variant.compare_at_price != 0 and item.variant.compare_at_price != item.final_price -%}
+                <small class="upsell-cart__price upsell-cart__price--strikethrough">
+                  {{ item.variant.compare_at_price | money }}
+                </small>
+                <span class="upsell-cart__price upsell-cart__discount">
+                  {{ item.final_price | money }}
+                </span>
+              {%- else -%}
+                <span class="upsell-cart__price">
+                  {{ item.original_price | money }}
+                </span>
+              {%- endif -%}
+
+              {%- if item.line_level_discount_allocations != blank -%}
+                {%- for discount_allocation in item.line_level_discount_allocations -%}
+                  <div>
+                    <span class="upsell-cart__discount-name">{{ discount_allocation.discount_application.title }}</span>
+                    <small class="upsell-cart__discount">-{{ discount_allocation.amount | money }}</small>
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+
+              {%- if item.unit_price_measurement -%}
+                {%- capture unit_price_base_unit -%}
+                  <span>
+                    {%- if item.unit_price_measurement -%}
+                      {%- if item.unit_price_measurement.reference_value != 1 -%}
+                        {{ item.unit_price_measurement.reference_value }}
+                      {%- endif -%}
+                      {{ item.unit_price_measurement.reference_unit }}
+                    {%- endif -%}
+                  </span>
+                {%- endcapture -%}
+
+                <div class="upsell-cart__unit-price">{{ item.unit_price | money }}/{{ unit_price_base_unit }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="upsell-cart__upsell">
+    <div class="upsell-cart__slider upsell-cart__slider--inactive">
+      <button type="button" class="upsell-cart__slider-arrow" data-action="prev">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="upsell-icon upsell-icon-chevron-left" viewBox="0 0 284.49 498.98"><path d="M249.49 0a35 35 0 0 1 24.75 59.75L84.49 249.49l189.75 189.74a35.002 35.002 0 1 1-49.5 49.5L10.25 274.24a35 35 0 0 1 0-49.5L224.74 10.25A34.89 34.89 0 0 1 249.49 0z"/></svg>
+      </button>
+      <div class="upsell-cart__slider-inner"></div>
+      <button type="button" class="upsell-cart__slider-arrow" data-action="next">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="upsell-icon upsell-icon-chevron-right" viewBox="0 0 284.49 498.98"><path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98z"/></svg>
+      </button>
+    </div>
+    <div class="upsell-shipping upsell-shipping--inactive">
+      <div class="upsell-shipping__text">
+        {{ shop.metafields.obsidian_upsell[locale].free_shipping_below }}
+      </div>
+      <div class="upsell-shipping__bar">
+        <div class="upsell-shipping__percent"></div>
+      </div>
+      <div class="upsell-shipping__full">
+        <span class="upsell-shipping__full-text">
+          {{ shop.metafields.obsidian_upsell[locale].free_shipping_above }}
+        </span>
+        <svg class="upsell-shipping__truck" class height='100px' width='100px' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"><g><rect x="30" y="22" width="12" height="2"></rect><path d="M10.2,40c-2.2,0-4-1.8-4-4c0-2.2,1.8-4,4-4c2.2,0,4,1.8,4,4C14.2,38.2,12.4,40,10.2,40z M10.2,34   c-1.1,0-2,0.9-2,2c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2C12.2,34.9,11.3,34,10.2,34z"></path><path d="M37,40c-2.2,0-4-1.8-4-4c0-2.2,1.8-4,4-4c2.2,0,4,1.8,4,4C41,38.2,39.2,40,37,40z M37,34c-1.1,0-2,0.9-2,2   c0,1.1,0.9,2,2,2s2-0.9,2-2C39,34.9,38.1,34,37,34z"></path><path d="M47,36h-7.9l-0.2-0.7c-0.3-0.8-1-1.3-1.9-1.3c-0.8,0-1.6,0.5-1.9,1.3L34.9,36H12.3L12,35.3   c-0.3-0.8-1-1.3-1.9-1.3c-0.8,0-1.6,0.5-1.9,1.3L8.1,36H1v-2h5.7c0.7-1.2,2-2,3.5-2c1.4,0,2.7,0.8,3.5,2H29V14h9.6l4.1,8.3l4.3,2.1   V36z M40.5,34H45v-8.4l-3.7-1.9L37.4,16H31v18h2.5c0.7-1.2,2-2,3.5-2C38.4,32,39.7,32.8,40.5,34z"></path><polygon points="31,35 29,35 29,10 6,10 6,35 4,35 4,8 31,8 "></polygon></g></svg>
+      </div>
+
+      {%- if shop.metafields.obsidian_upsell[locale].disclaimer != blank -%}
+        <div class="upsell-shipping__text upsell-shipping__text--disclaimer">
+          {{ shop.metafields.obsidian_upsell[locale].disclaimer }}
+
+          {%- if shop.metafields.obsidian_upsell[locale].disclaimer_link != blank and shop.metafields.obsidian_upsell[locale].disclaimer_link_text != blank -%}
+          <a href="{{ shop.metafields.obsidian_upsell[locale].disclaimer_link }}" target="_blank">
+            {{ shop.metafields.obsidian_upsell[locale].disclaimer_link_text }}
+          </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  {%- if shop.metafields.obsidian_upsell._custom_footer_html != blank -%}
+  <div class="upsell-cart__footer upsell-cart__footer--custom-html">
+    {{ shop.metafields.obsidian_upsell._custom_footer_html }}
+  </div>
+  {%- endif -%}
+  <div class="upsell-cart__footer">
+    <div class="upsell-cart__discounts upsell-cart__item-sub upsell-cart__item-row" {% if cart.cart_level_discount_applications == blank %}style="display: none"{% endif %}>
+      <div class="upsell-cart__subtotal-label">
+        {{ shop.metafields.obsidian_upsell[locale].discounts_title }}
+      </div>
+      <div>
+        {% for cart_discount in cart.cart_level_discount_applications %}
+          <div>
+            <span class="upsell-cart__discount-name">{{ cart_discount.title }}</span>
+            <span class="upsell-cart__discount">-{{ cart_discount.total_allocated_amount | money }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="upsell-cart__item-sub upsell-cart__item-row">
+      <div class="upsell-cart__subtotal-label">
+        {{ shop.metafields.obsidian_upsell[locale].cart_subtotal }}
+      </div>
+      <div class="upsell-cart__subtotal">{{ cart.total_price | money }}</div>
+    </div>
+
+    {% assign upsell_note_size = cart.note | size %}
+    <div data-notes-section class="upsell-cart__item-sub upsell-cart__item-row upsell-cart__item-row--small">
+      <button type="button" data-riser-trigger="notes" {% if upsell_note_size > 0 %}class="upsell-cart__note-added"{% endif %}>
+        <span class="upsell-cart__add-note">
+          {{ shop.metafields.obsidian_upsell[locale].add_note }}
+        </span>
+        <span class="upsell-cart__add-edit">
+          {{ shop.metafields.obsidian_upsell[locale].edit_note }}
+        </span>
+      </button>
+    </div>
+
+    <div data-terms-section class="upsell-cart__item-sub upsell-cart__item-row upsell-cart__item-row--small">
+      {%- assign terms_label = shop.metafields.obsidian_upsell[locale].accept_terms_label -%}
+      {%- if terms_label contains '[' and terms_label contains ']' -%}
+        {% assign terms_label = terms_label | replace: '[', '<button type="button" data-riser-trigger="terms">' | replace: ']', '</button>' %}
+      {%- else -%}
+        {% capture terms_label %}
+          <button type="button" data-riser-trigger="terms">{{ terms_label }}</button>
+        {% endcapture %}
+      {%- endif -%}
+      <input type="checkbox" data-terms-checkbox id="UpsellTerms" class="upsell-cart__terms-checkbox">
+      <label for="UpsellTerms" class="upsell-cart__terms-label">
+        {{ terms_label }}
+      </label>
+    </div>
+
+    <div class="upsell-cart__checkout-wrapper">
+      <a href="{{ routes.cart_url }}" class="btn button upsell-cart__cta" data-btn-action="cart">
+        {{ shop.metafields.obsidian_upsell[locale].checkout_title }}
+      </a>
+      <button type="submit" name="checkout" class="btn button upsell-cart__cta upsell-cart__checkout" data-btn-action="checkout">
+        {{ shop.metafields.obsidian_upsell[locale].checkout_title }}
+      </button>
+    </div>
+  </div>
+  <div class="upsell-cart__empty">
+    <svg class="upsell-cart__empty-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 83.5" style="enable-background:new 0 0 100 83.5;" xml:space="preserve"><path d="M97.7,14.3c-0.3-0.3-0.7-0.5-1.2-0.5h-78l-1.6-8.7c-0.1-0.7-0.7-1.2-1.3-1.3L3,2.2C2.2,2.1,1.4,2.7,1.3,3.6s0.5,1.7,1.4,1.8 l11.5,1.4l9.9,57c0.1,0.8,0.8,1.3,1.6,1.3h8.4v1.1c-4.1,0.9-6.8,4.9-5.9,9.1c0.9,4.1,4.9,6.8,9.1,5.9c4.1-0.9,6.8-4.9,5.9-9.1 c-0.6-3-3-5.3-5.9-5.9V65h41v1.1c-4.1,0.9-6.8,4.9-5.9,9.1c0.9,4.1,4.9,6.8,9.1,5.9c4.1-0.9,6.8-4.9,5.9-9.1c-0.6-3-3-5.3-5.9-5.9 V65H89c0.9,0,1.6-0.7,1.6-1.6s-0.7-1.6-1.6-1.6H26.9L26,56.7h64.6c0.8,0,1.5-0.6,1.6-1.3L98,15.6C98.1,15.1,97.9,14.7,97.7,14.3z   M40.1,73.6c0,2.5-2,4.5-4.5,4.5s-4.5-2-4.5-4.5c0-2.5,2-4.5,4.5-4.5l0,0C38.1,69.1,40.1,71.1,40.1,73.6z M84.3,73.6  c0,2.5-2,4.5-4.5,4.5c-2.5,0-4.5-2-4.5-4.5c0-2.5,2-4.5,4.5-4.5l0,0C82.3,69.1,84.3,71.1,84.3,73.6z M89.2,53.6H25.4L19,16.9h75.6 L89.2,53.6z M48.9,43.1c-0.9,0-1.6-0.7-1.6-1.6c0-0.2,0-0.4,0.1-0.6c2.1-5.2,8-7.8,13.2-5.8c2.6,1,4.7,3.1,5.8,5.8  c0.4,0.8,0,1.7-0.8,2.1c-0.8,0.4-1.7,0-2.1-0.8c0,0,0-0.1,0-0.1c-1.1-2.7-3.7-4.5-6.6-4.5c-2.9,0-5.5,1.8-6.5,4.5 C50.1,42.7,49.5,43.1,48.9,43.1z M51.8,29.9c0,1.4-1.2,2.5-2.6,2.4c-1.4,0-2.5-1.2-2.4-2.6c0-1.4,1.2-2.4,2.6-2.4 C50.7,27.3,51.8,28.5,51.8,29.9C51.8,29.9,51.8,29.9,51.8,29.9z M67.1,29.9c0,1.4-1.2,2.5-2.6,2.4s-2.5-1.2-2.4-2.6 c0-1.3,1.1-2.4,2.5-2.4C65.9,27.3,67,28.4,67.1,29.9C67.1,29.8,67.1,29.8,67.1,29.9z"/></svg>
+    <div class="upsell-cart__empty-label">
+      {{ shop.metafields.obsidian_upsell[locale].cart_empty }}
+    </div>
+    <a href="{{ routes.all_products_collection_url }}" class="btn button upsell-cart__empty-btn">
+      {{ shop.metafields.obsidian_upsell[locale].continue_shopping }}
+    </a>
+  </div>
+
+  <div class="upsell-cart__riser" data-riser="notes">
+    <div class="upsell-cart__riser-inner">
+      <button type="button" data-riser-close class="upsell-cart__close-riser" aria-label="Close">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="upsell-icon upsell-icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
+      </button>
+      <div class="upsell-cart__riser-header upsell-cart__riser-header--no-border">
+        <div class="upsell-cart__riser-title">
+          {{ shop.metafields.obsidian_upsell[locale].add_note_title }}
+        </div>
+      </div>
+      <div class="upsell-cart__riser-main">
+        <textarea name="note" class="upsell-cart__note" placeholder="{{ shop.metafields.obsidian_upsell[locale].note_placeholder }}">{{ cart.note }}</textarea>
+      </div>
+      <div class="upsell-cart__riser-footer">
+        <button type="button" class="btn button upsell-cart__cta" data-riser-cta>
+          {{ shop.metafields.obsidian_upsell[locale].save_note }}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

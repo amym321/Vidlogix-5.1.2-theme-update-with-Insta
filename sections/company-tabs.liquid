@@ -1,0 +1,38 @@
+{% comment %} New file per 4.1.1 customization {% endcomment %}
+{% assign tab_menu = linklists[section.settings.sub_menu_link_list] %}
+
+<div class="secondary-tabs">
+  <div class="page-width">
+    <ul>
+      {% for link in tab_menu.links %}
+        <li {% if link.active %}class="secondary-tabs__active"{% endif %}>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Secondary tabs",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Company pages tab menu",
+        "info": "This menu shows as tabs on the About, Careers, and Charity pages."
+      },
+      {
+        "type": "link_list",
+        "id": "sub_menu_link_list",
+        "label": "Tab menu"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Secondary tabs"
+      }
+    ]
+  }
+{% endschema %}

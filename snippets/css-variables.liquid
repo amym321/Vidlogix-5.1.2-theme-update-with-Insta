@@ -1,0 +1,76 @@
+    {% comment %} code change per 4.1.1 customization. added and modified code  {% endcomment %}
+
+{%- style -%}
+
+@font-face {
+  font-family: 'Sofia Pro Italic';
+  src: url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_light_italic-webfont.woff2?6513840986351432305") format("woff2"), url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_light_italic-webfont.woff?6513840986351432305") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+  @font-face {
+    font-family: 'Sofia Pro';
+    src: url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_light-webfont.woff2?6513840986351432305") format("woff2"), url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_light-webfont.woff?6513840986351432305") format("woff");
+    font-weight: normal;
+    font-style: normal; }
+  @font-face {
+    font-family: 'Sofia Pro Reg Italic';
+    src: url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_medium_italic-webfont.woff2?1289030811618143343") format("woff2"), url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_medium_italic-webfont.woff?10503797364640283480") format("woff");
+    font-weight: normal;
+    font-style: normal; }
+  @font-face {
+    font-family: 'Sofia Pro Reg';
+    src: url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_medium-webfont.woff2?10503797364640283480") format("woff2"), url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_medium-webfont.woff?10503797364640283480") format("woff");
+    font-weight: normal;
+    font-style: normal; }
+  @font-face {
+    font-family: 'Sofia Pro Reg Italic';
+    src: url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_semi_bold_italic-webfont.woff2?6513840986351432305") format("woff2"), url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_semi_bold_italic-webfont.woff?6513840986351432305") format("woff");
+    font-weight: normal;
+    font-style: normal; }
+  @font-face {
+    font-family: 'Sofia Pro Reg';
+    src: url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_semi_bold-webfont.woff2?6513840986351432305") format("woff2"), url("https://cdn.shopify.com/s/files/1/0056/9632/3651/files/sofia_pro_semi_bold-webfont.woff?6513840986351432305") format("woff");
+    font-weight: normal;
+    font-style: normal; }
+
+  :root {
+    {% comment %}--typeHeaderPrimary: {{ settings.type_header_font_family.family }};{% endcomment %}
+    --typeHeaderPrimary: "Sofia Pro Reg";
+
+    --typeHeaderFallback: {{ settings.type_header_font_family.fallback_families }};
+    --typeHeaderSize: {{ settings.type_header_base_size | default: '32' | append: 'px' }};
+   {% comment %} --typeHeaderWeight: {{ settings.type_header_font_family.weight }}; {% endcomment %}
+    --typeHeaderWeight: normal;
+
+    --typeHeaderLineHeight: {{ settings.type_header_line_height | default: 1.4 }};
+    --typeHeaderSpacing: {{ settings.type_header_spacing | default: '25' | divided_by: 1000.00 | append: 'em' }};
+
+    {% comment %}--typeBasePrimary:{{ settings.type_base_font_family.family }};{% endcomment %}
+    --typeBasePrimary: "Sofia Pro";
+    
+    --typeBaseFallback:{{ settings.type_base_font_family.fallback_families }};
+    --typeBaseSize: {{ settings.type_base_size | default: 16 | append: 'px' }};
+    --typeBaseWeight: {{ settings.type_base_font_family.weight }};
+    --typeBaseSpacing: {{ settings.type_base_spacing | default: '50' | divided_by: 1000.00 | append: 'em' }};
+    --typeBaseLineHeight: {{ settings.type_base_line_height | default: 1.4 }};
+
+    --typeCollectionTitle: {{ settings.type_collection_size | append: 'px' }};
+
+    --iconWeight: {{ settings.icon_weight | default: '5px' }};
+    --iconLinecaps: {{ settings.icon_linecaps | default: 'miter' }};
+
+    {% if settings.button_style == 'round-slight' %}
+      --buttonRadius: 3px;
+    {% elsif settings.button_style == 'round' %}
+      --buttonRadius: 50px;
+    {% else %}
+      --buttonRadius: 0px;
+    {% endif %}
+
+    --colorGridOverlayOpacity: {{ settings.collection_grid_opacity | divided_by: 100.0 }};
+  }
+
+  .placeholder-content {
+    background-image: linear-gradient(100deg, {{ settings.color_small_image_bg }} 40%, {{ settings.color_small_image_bg | color_darken: 3 }} 63%, {{ settings.color_small_image_bg }} 79%);
+  }
+{%- endstyle -%}

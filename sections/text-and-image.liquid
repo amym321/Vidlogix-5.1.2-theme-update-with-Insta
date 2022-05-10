@@ -1,0 +1,403 @@
+{% comment %} modifications made here that were previously added to page-block-text-and-image in 4.1.1 {% endcomment %}
+
+{%- if template =='page.about' or template =='page.careers' %}<div class="custom-acc-template">{% endif %}
+
+  {%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+  
+  {%- liquid
+    assign overlap_images = true
+    if section.settings.image != blank and section.settings.image2 == blank
+      assign overlap_images = false
+    endif
+  -%}
+  
+  <div class="{% if section.settings.spacing %}index-section {% endif %} section-{{ section.id }} {%- if template =='page.careers' %} career-display {% endif %}">
+  
+    <div class="page-width feature-row-wrapper">
+      {%- capture image_layout -%}
+        <div class="feature-row__item{% if overlap_images %} feature-row__item--overlap-images{% endif %}" style="max-width: {{ section.settings.image_width }}px" data-aos>
+          <div class="feature-row__item--holder" {% if section.settings.image_bottom_margin %}style="margin-bottom: {{ section.settings.title_bottom_margin }}px !important;"{% endif %}>
+            {%- if section.settings.image != blank -%}
+              {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}<a href="{{ section.settings.button_link }}">{%- endif -%}
+                <div class="image-wrap{% if section.settings.layout == 'top' %} image--top{% elsif section.settings.layout == 'bottom' %} image--bottom{% else %} image--side{% endif %}">
+                  {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                  <img class="feature-row__image lazyload"
+                    data-src="{{ img_url }}"
+                    data-widths="[180, 360, 540, 750, 900, 1080]"
+                    data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+                    data-sizes="auto"
+                    alt="{{ section.settings.image.alt }}">
+                </div>
+              {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}</a>{%- endif -%}
+            {%- endif -%}
+            {%- if section.settings.image2 != blank -%}
+              <div>
+                {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}<a href="{{ section.settings.button_link }}">{%- endif -%}
+                  <div class="image-wrap" style="height: 0; padding-bottom: {{ 100 | divided_by: section.settings.image2.aspect_ratio }}%;">
+                    {%- assign img_url = section.settings.image2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                    <img class="feature-row__image lazyload"
+                      data-src="{{ img_url }}"
+                      data-widths="[180, 360, 540, 750, 900, 1080]"
+                      data-aspectratio="{{ section.settings.image2.aspect_ratio }}"
+                      data-sizes="auto"
+                      alt="{{ section.settings.image2.alt }}">
+                  </div>
+                {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}</a>{%- endif -%}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.image == blank and section.settings.image2 == blank -%}
+              <div>
+                <div class="image-wrap">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              </div>
+              <div>
+                <div class="image-wrap">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endcapture -%}
+  
+      <div class="{% if section.settings.layout == 'top' or section.settings.layout == 'bottom' %}feature-column{% else %}feature-row{% endif %} text-{{ section.settings.align_text }}" data-aos>
+        {%- if section.settings.layout == 'left' or section.settings.layout == 'top' -%}
+          {{ image_layout }}
+        {%- endif -%}
+  
+        <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout }}" data-aos>
+          {%- if section.settings.subtitle != blank -%}
+            <div class="subheading appear-delay{% cycle '','-1','-2','-3','-4' %} h5 section-header__title{% if section.settings.center_title %} text-center{% endif %}">{{ section.settings.subtitle }}</div>
+          {%- endif -%}
+          {%- if section.settings.title != blank -%}
+            <div class="h1 appear-delay{% cycle '','-1','-2','-3','-4' %} h3{% if section.settings.center_title %} text-center{% endif %}"  {% if section.settings.title_bottom_margin %}style="margin-bottom: {{ section.settings.title_bottom_margin }}px !important;"{% endif %} >{{ section.settings.title | escape }}</div>
+            {%- endif -%}
+          {% if section.settings.text_below and section.settings.layout == 'bottom' %}
+            {%- if section.settings.layout == 'right' or section.settings.layout == 'bottom' -%}
+              {{ image_layout }}
+            {%- endif -%}
+          {% endif %}
+          {%- if section.settings.text != blank -%}
+            <div class="rte featured-row__subtext appear-delay{% cycle '','-1','-2','-3','-4' %}">{{ section.settings.text }}</div>
+          {%- endif -%}
+          
+          {% if section.settings.button_chat == true and section.settings.button_label != blank %}
+            <a href="/pages\/contact"  class="btn">
+              {{ section.settings.button_label }}
+            </a>
+  
+          {% comment%} 'Why Buy Vidlogix' popup - am {% endcomment%}
+          {% elsif section.settings.button_popup == true and section.settings.button_label != blank %}
+            <div id="why-buy-btn"  class=" btn">
+              {{ section.settings.button_label }}
+            </div>
+            <div id="why-buy-popup" class="why-modal">
+              <div class="modal-content">
+                <div  class="why-buy-popup " style="color:black;">
+                  <div id="why-outer-modal" class="modal modal--square modal--mobile-friendly ">
+                    <div id="why-modal-inner" class="modal__inner">
+                      <div class="modal__centered medium-up--text-center">
+                        <span class="close-why-popup">&times;</span>
+                        {% render 'why-buy-popup-snippet' %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+          {%- elsif section.settings.button_label != blank and section.settings.button_popup != true -%}
+            <div class="appear-delay{% cycle '','-1','-2','-3','-4' %}">
+              <a href="{{ section.settings.button_link }}" class="btn{% if section.settings.button_style == 'secondary' %} btn--tertiary{% endif %}">
+                {{ section.settings.button_label }}
+              </a>
+            </div>
+          {%- endif -%}
+          {% if section.settings.disclaimer != blank %}
+            <div class="feature-row__disclaimer">
+              {{ section.settings.disclaimer }}
+            </div>
+          {% endif %}
+        </div>
+  
+        {% unless section.settings.text_below %}
+          {%- if section.settings.layout == 'right' or section.settings.layout == 'bottom' -%}
+            {{ image_layout }}
+          {%- endif -%}
+        {% endunless %}
+      </div>
+    </div>
+  
+  </div>
+  
+  {%- if section.settings.divider -%}</div>{%- endif -%}
+  
+  {%- if template =='page.about' or template =='page.careers' %}</div>{% endif %}
+  
+  {% style %}
+    {% if section.settings.background_color %}
+      .section-{{ section.id }} {
+        background-color: {{ section.settings.background_color }};
+        margin-bottom: 0px;
+        {% if section.settings.natural_image_height %}
+          padding: 0;
+        {% else %}
+          padding: 75px 0;
+        {% endif %}
+      }
+  
+    {% endif %}
+  
+    {% if section.settings.background_color and section.settings.layout == 'bottom' %}
+      .custom-acc-template .section-{{ section.id }} {
+        padding: 130px 0 140px;
+      }
+    {% endif %}
+  
+    {% if section.settings.full_width %}
+      @media screen and (min-width: 768px) {
+        .section-{{ section.id }} {
+          position: relative;
+          overflow: hidden;
+        }
+        .section-{{ section.id }} .feature-row {
+          min-height: 400px;
+        }
+        .section-{{ section.id }} .feature-row__item .feature-row__item--holder {
+          width: 50%;
+          height: 100%;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          {% if section.settings.layout == 'left' %}
+            left: 0;
+          {% elsif section.settings.layout == 'right' %}
+            right: 0;
+          {% endif %}
+        }
+        .section-{{ section.id }} .feature-row__item .feature-row__item--holder .image-wrap {
+          height: 100%;
+        }
+        .section-{{ section.id }} .feature-row__item .feature-row__item--holder .feature-row__image {
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    {% else %}
+      .section-{{ section.id }} .feature-row__item .feature-row__item--holder .image-wrap {
+        height: 0;
+        padding-bottom: {{ 100 | divided_by: section.settings.image.aspect_ratio }}%;
+      }
+      .section-{{ section.id }} .feature-row__item .feature-row__item--holder {
+        margin: 0 auto;
+        max-width: {{ section.settings.image_width }}px;
+      }
+    {% endif %}
+  
+    {% if section.settings.layout == 'bottom' %}
+      .section-{{ section.id }} .feature-row__item .feature-row__item--holder {
+        margin-top: 25px;
+      }
+    {% endif %}
+  
+    .section-{{ section.id }} {
+      color: {{ section.settings.text_color }};
+    }
+  
+    @media screen and (max-width: 767px) {
+      .section-{{ section.id }} {
+        padding: 50px 0;
+      }
+  
+      .image-wrap.image--side {
+        margin-bottom: 20px;
+      }
+    }
+  {% endstyle %}
+  
+  {% schema %}
+    {
+      "name": "Image with text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image2",
+          "label": "Image 2"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "label": "Image width",
+          "default": 700,
+          "min": 200,
+          "max": 700,
+          "step": 10,
+          "unit": "px"
+        },
+            {
+              "type": "checkbox",
+              "id": "full_width",
+              "label": "Image full width",
+              "default": false
+            },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subheading"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Image with text"
+        },
+  
+        {
+          "type": "checkbox",
+          "id": "center_title",
+          "label": "Center title and/or subtitle only",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "text_below",
+          "label": "Show text below the image",
+          "info": "Only applies when layout is set to 'Image on Bottom'",
+          "default": false
+        },
+  
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Pair large text with an image to tell a story, explain a detail about your product, or describe a new promotion.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default": "primary",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "align_text",
+          "label": "Text alignment for headings & text block",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Centered"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "button_popup",
+          "label": "Button opens Why Buy Vidlogix popup.",
+          "default": false, 
+          "info": "Button link must be blank for the popup to work."
+        },
+        {
+          "type": "checkbox",
+          "id": "button_chat",
+          "label": "Button opens chat widget. Defaults to Contact page for now",
+          "default": false
+        },
+        {
+          "type": "richtext",
+          "id": "disclaimer",
+          "label": "Disclaimer text if needed"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Layout",
+          "default": "right",
+          "options": [
+            {
+              "value": "left",
+              "label": "Image on left"
+            },
+            {
+              "value": "right",
+              "label": "Image on right"
+            },
+            {
+              "value": "top",
+              "label": "Image on top"
+            },
+            {
+              "value": "bottom",
+              "label": "Image on bottom"
+            }
+          ]
+        },
+        {
+          "type": "number",
+          "id": "title_bottom_margin",
+          "label": "Bottom margin for the title"
+        },
+        {
+          "type": "number",
+          "id": "image_bottom_margin",
+          "label": "Bottom margin for the image"
+        },      
+        {
+          "type": "checkbox",
+          "id": "divider",
+          "label": "Show section divider",
+          "default": false
+        }
+      ],
+      "presets": [
+        {
+          "name": "Image with text"
+        }
+      ]
+    }
+  {% endschema %}
+  

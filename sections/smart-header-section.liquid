@@ -1,0 +1,32 @@
+{% comment %} file added per 4.1.1 customization {% endcomment %}
+
+{% render 'smart-header' %}
+
+{% schema %}
+  {
+    "name": "Smart Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Smart Header"
+      },
+      {
+        "type": "text",
+        "id": "page_title",
+        "label": "Page title",
+        "info": "Leave this blank to use the default page title"
+      },
+      {
+        "type": "text",
+        "id": "page_description",
+        "label": "Page description",
+        "info": "Leave this blank to use the default page text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Smart Header"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,79 @@
+{% comment %} DO NOT MODIFY CONTENTS OF THIS PAGE - OR YOU'LL BREAK SOMETHING - IF YOU DO, WE'LL CHARGE YOU TO FIX IT, SOOOO... THERE YOU GO.{% endcomment %}
+
+{% comment %} file added from templates/page.store_brands in 4.1.1 {% endcomment %}
+
+{%- assign border_radius = shop.metafields.shop_my_brand.design.border_radius | default: 3 -%}{%- assign primary_color = shop.metafields.shop_my_brand.design.primary_color -%}{%- if primary_color == "1,1,1,1" -%}{%- assign primary_color = nil -%}{%- endif -%}{%- assign accent_color = shop.metafields.shop_my_brand.design.accent_color | default: "79,68,146,1" -%}{%- assign box_shadow = shop.metafields.shop_my_brand.design.box_shadow | default: "0,0,0,0.1" -%}{%- assign tmp = box_shadow | split: "," -%}{%- assign btmp = tmp[3] | times: 4 -%}{%- if btmp > 1 -%}{%- assign btmp = 1 -%}{%- endif -%}{%- assign box_shadow_active = tmp[0] | append: "," | append: tmp[1] | append: "," | append: tmp[2] | append: "," | append: btmp -%}{%- assign categories = "All" -%}
+<style>* {--primary-color: rgba({{ primary_color }});--accent-color: rgba({{ accent_color }});--items-per-row: {{ shop.metafields.shop_my_brand.design.items_per_row | default: 3 }};--border-radius: {{ border_radius }}px;--box-shadow: rgba({{ box_shadow }});--box-shadow-active: rgba({{ box_shadow_active }});}#smb-app *:not(.smb-btn) { {% if primary_color %}color: var(--primary-color) !important; {% endif %} }{% if shop.metafields.shop_my_brand.design.monochrome == "true" %}#smb-app img{-webkit-filter: grayscale(1)!important;filter: gray!important;filter: grayscale(1)!important;}{% endif %}.smb-action-pack { transform: translateX(500px) !important;}</style>
+{{ 'smb_app.css' | asset_url | stylesheet_tag }}
+
+<script>
+  function unique (array) {
+    return array.filter(function(a){
+      return !this[a] ? this[a] = true : false;
+    }, {});
+  }
+  window.shopMyBrands = {
+    brands: [],
+    categories: [],
+    config: {
+      title: "{{ shop.metafields.shop_my_brand.design.title }}",
+      subtitle: "{{ shop.metafields.shop_my_brand.design.subtitle }}",
+      layout: {
+        showQueryFilter: {{ shop.metafields_shop_my_brand.design.queryFilter | default: true }},
+        showCategoryFilter: {{ shop.metafields_shop_my_brand.design.categoryFilter | default: true }},
+        borderRadius: {{ border_radius }},
+      	filtering: "{{ shop.metafields.shop_my_brand.design.filtering }}",
+      	buttons: {
+      	  bestSeller: "{{ shop.metafields.shop_my_brand.design.brand_bestseller | default: 'Brand Bestsellers' }}",
+      	  visitWebsite: "{{ shop.metafields.shop_my_brand.design.visit_website | default: 'Visit Website' }}"
+        },
+        monochrome: "{{ shop.metafields.shop_my_brand.design.monochrome | default: 'false' }}",
+        customUpsells: {{ shop.metafields.shop_my_brand.extensions_active | default: false }},
+        paginationLimit: {% if shop.metafields.shop_my_brand.extensions_active == "true" %}{{ shop.metafields.shop_my_brand.pagination_limit | default: 999 }}{% else %}999{% endif %},
+      }
+    }
+  }
+
+  {% for vendor in shop.vendors %}
+    {% assign brand = vendor | escape_html %}
+    {% assign brand_data = brand | downcase | remove: "," | remove: "&" | remove: "." | replace: "-", "_" | replace: " ", "_" | truncate: 29 | remove: "..." | remove: "_" | remove: "'" | remove: 0 | remove: 1 | remove: 2 | remove: 3 | remove: 4 | remove: 5 | remove: 6 | remove: 7 | remove: 8 | remove: 9 %}
+    {% assign meta = shop.metafields.shop_my_brand[brand_data] %}
+  	{% if meta.brand_category and meta.brand_category.size > 3 %}{% assign categories = categories | append: "," | append: meta.brand_category %}{% endif %}
+    {% if meta.brand_disabled or brand.size < 3 %}{% continue %}{% endif %}
+    window.shopMyBrands.brands.push({
+      name: `{{ brand }}`,
+      id: {{ forloop.index | minus: 1 }},
+      description: `{{ meta.brand_description | default: '' }}`,
+      website: `{{ meta.brand_website | default: "" }}`,
+      imageUrl: "{{ meta.brand_image | default: 'https://cdn.shopify.com/s/files/1/2048/3941/files/placeholder.png?13133' }}",
+      categories: `{{ meta.brand_category }}`,
+      {% unless shop.metafields.shop_my_brand.extensions_active == true %}bestSellerUrl: "{{ '/collections/vendors?q=' | append: brand | append: "&sort_by=best-selling" }}"{% endunless %}
+    })
+  {% endfor %}
+  window.shopMyBrands.categories = unique("{{ categories }}".split(",").map(item => item.trim()))
+
+  const param_brands = new URLSearchParams(window.location.search).get("brands")
+  if(param_brands){
+    const param_filter = param_brands.split(",")
+    const selection = "." + param_filter[0].toLowerCase()
+    window.shopMyBrands.categories = window.shopMyBrands.categories.filter(category => param_filter.includes(category.toLowerCase()))
+
+    var interval = setInterval(function(){
+      if(document.querySelector(".smb-search__categoryField")){
+        const $value = document.querySelector(".smb-search__categoryField > option").value
+        const $el = document.querySelector(".smb-search__categoryField")
+        $el.value = $value
+        $el.dispatchEvent(new Event('change'))
+        clearInterval(interval)
+      }
+    }, 150)
+  }
+</script>
+
+<div class="page-width" style="padding-bottom: 60px;">
+  <div class="grid" style="margin-left: auto; margin-right: auto; max-width: 1200px !important; padding-top:60px !important;">
+    <div class="rte">
+      <div id="smb__app"></div>
+    </div>
+  </div>
+</div>

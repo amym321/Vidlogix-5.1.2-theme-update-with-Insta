@@ -1,0 +1,32 @@
+{% comment %} New file per 4.1.1 customization {% endcomment %}
+{%- assign announcement_block_count = 0 -%}
+{%- assign announcements = shop.metafields.cart.announcement_message -%}
+{% for announcement in announcements %}
+    {%- assign announcement_block_count = announcement_block_count | plus: 1 -%}
+{% endfor %}
+
+
+<div class="cart-bar appear-animation appear-delay-2">
+  <div class="slideshow-wrapper">
+    <button type="button" class="visually-hidden slideshow__pause" data-id="{{ section.id }}" aria-live="polite">
+      <span class="slideshow__pause-stop">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-pause" viewBox="0 0 10 13"><g fill="#000" fill-rule="evenodd"><path d="M0 0h3v13H0zM7 0h3v13H7z"/></g></svg>
+        <span class="icon__fallback-text">{{ 'sections.slideshow.pause_slideshow' | t }}</span>
+      </span>
+      <span class="slideshow__pause-play">
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-play" viewBox="18.24 17.35 24.52 28.3"><path fill="#323232" d="M22.1 19.151v25.5l20.4-13.489-20.4-12.011z"/></svg>
+        <span class="icon__fallback-text">{{ 'sections.slideshow.play_slideshow' | t }}</span>
+      </span>
+    </button>
+
+    <div id="CartSlider" class="cart-slider" data-block-count="2">
+      {%- assign slide_index = 0 -%}
+      {%- for announcement in shop.metafields.cart.announcement_message -%}
+        <div class="cart-slider__slide" data-index="{{ slide_index }}">
+          <span class="cart-text">{{ announcement }}</span>
+        </div>
+        {%- assign slide_index = slide_index | plus: 1 -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

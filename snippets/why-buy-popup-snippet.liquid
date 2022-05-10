@@ -1,0 +1,131 @@
+{% comment %} Why Buy Vidlogix popup modal - am {% endcomment %}
+{%- liquid 
+  assign title_rich = shop.metafields.globals.header_title
+  assign text_rich = shop.metafields.globals.header_text
+
+  assign align_text_A = 'center'
+  assign align_text_B = 'center'
+
+  assign height_A = 'height_A'
+  assign height_C = 'height_C'
+
+  assign block_class_A = 'why-item'
+  assign block_class_B = 'why-item-middle'
+
+  assign image_class_A = 'why-image-container'
+
+  assign enable_image_1 = true
+  assign image_1 = shop.metafields.globals.free_shipping_icon[0]
+  assign title_1 = shop.metafields.globals.free_shipping_title
+  assign text_1 = shop.metafields.globals.free_shipping_text
+  assign button_label_1 = shop.metafields.globals.free_shipping_button_text
+  assign button_link_1 = shop.metafields.globals.free_shipping_button_link
+
+  assign enable_image_2 = true
+  assign image_2 = shop.metafields.globals.returns_icon[0]
+  assign title_2 = shop.metafields.globals.returns_title
+  assign text_2 = shop.metafields.globals.returns_text
+  assign button_label_2 = shop.metafields.globals.returns_button_text
+  assign button_link_2 = shop.metafields.globals.returns_button_link
+  
+  assign enable_image_3 = true
+  assign image_3 = shop.metafields.globals.free_tech_support_icon[0]
+  assign title_3 = shop.metafields.globals.free_tech_support_title
+  assign text_3 = shop.metafields.globals.free_tech_support_text
+  assign button_label_3 = shop.metafields.globals.free_tech_support_button_text
+  assign button_link_3 = shop.metafields.globals.free_tech_support_button_link
+  
+  assign enable_image_4 = true
+  assign image_4 = shop.metafields.globals.price_match_icon[0]
+  assign title_4 = shop.metafields.globals.price_match_title
+  assign text_4 = shop.metafields.globals.price_match_text
+  assign button_label_4 = shop.metafields.globals.price_match_button_text
+  assign button_link_4 = shop.metafields.globals.price_match_button_link
+
+  assign enable_image_B = true
+  assign image_B = shop.metafields.globals.military_icon[0]
+  assign title_B = shop.metafields.globals.military_title
+  assign text_B = shop.metafields.globals.military_text
+  assign button_label_B = shop.metafields.globals.military_button_text
+  assign button_link_B = shop.metafields.globals.military_button_link
+  assign disclaimer_text_B = shop.metafields.globals.military_disclaimer
+  
+  assign enable_image_5 = true
+  assign image_5 = shop.metafields.globals.warranty_icon[0]
+  assign title_5 = shop.metafields.globals.warranty_title
+  assign text_5 = shop.metafields.globals.warranty_text
+  assign button_label_5 = shop.metafields.globals.warranty_button_text
+  assign button_link_5 = shop.metafields.globals.warranty_button_link
+
+  assign enable_image_6 = true
+  assign image_6 = shop.metafields.globals.protection_icon[0]
+  assign title_6 = shop.metafields.globals.protection_title
+  assign text_6 = shop.metafields.globals.protection_text
+  assign button_label_6 = shop.metafields.globals.protection_button_text
+  assign button_link_6 = shop.metafields.globals.protection_button_link
+
+  assign enable_image_7 = true
+  assign image_7 = shop.metafields.globals.trusted_icon[0]
+  assign title_7 = shop.metafields.globals.trusted_title
+  assign text_7 = shop.metafields.globals.trusted_text
+  assign button_label_7 = shop.metafields.globals.trusted_button_text
+  assign button_link_7 = shop.metafields.globals.trusted_button_link
+
+  assign enable_image_8 = true
+  assign image_8 = shop.metafields.globals.research_icon[0]
+  assign title_8 = shop.metafields.globals.research_title
+  assign text_8 = shop.metafields.globals.research_text
+  assign button_label_8 = shop.metafields.globals.research_button_text
+  assign button_link_8 = shop.metafields.globals.research_button_link
+-%}
+
+<div class="modal__centered-content">
+  <div class="newsletter">
+
+    <!-- Rich Text -->
+    <div class="text-center page-width page-width--narrow">
+      <div class="theme-block why-rich-text">
+        {%- if title_rich -%}
+          <br>
+          <h2 class="section-header__title">{{ title_rich }}</h2>
+          <br><br>
+        {%- endif -%}
+        <div class="rte">
+          {%- if text_rich  -%}
+            {{ text_rich }}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+    <!-- 1ST 4 BLOCKS -->
+    <div class="grid flex-grid grid--uniform grid--flush-bottom">
+      {%- assign column_width = 'medium-up--one-quarter-popup' -%}
+      {% render 'why-buy-blocks', column_width: column_width, align_text: align_text_A, height: height_A, enable_image: enable_image_1, image_class: image_class_A,
+        why_image: image_1, title: title_1, text: text_1, button_label: button_label_1, button_link: button_link_1, block_class: block_class_A %}
+      {% render 'why-buy-blocks', column_width: column_width, align_text: align_text_A, height: height_A, enable_image: enable_image_2, image_class: image_class_A,
+        why_image: image_2, title: title_2, text: text_2, button_label: button_label_2, button_link: button_link_2, block_class: block_class_A %}
+      {% render 'why-buy-blocks', column_width: column_width, align_text: align_text_A, height: height_A, enable_image: enable_image_3, image_class: image_class_A,
+        why_image: image_3, title: title_3, text: text_3, button_label: button_label_3, button_link: button_link_3, block_class: block_class_A %}
+      {% render 'why-buy-blocks', column_width: column_width, align_text: align_text_A, height: height_A, enable_image: enable_image_4, image_class: image_class_A,
+        why_image: image_4, title: title_4, text: text_4, button_label: button_label_4, button_link: button_link_4, block_class: block_class_A %}
+    </div>
+    <!-- MIDDLE BLOCK -->
+    <div class="grid flex-grid grid--uniform grid--flush-bottom">
+      {%- assign column_width = '' -%}
+      {% render 'why-buy-blocks', column_width: column_width, align_text: align_text_B, enable_image: enable_image_B, why_image: image_B, 
+        title: title_B, text: text_B, button_label_B: button_label_B, button_link: button_link_B, disclaimer_text: disclaimer_text_B, block_class: block_class_B %}
+    </div>
+    <!-- LAST 4 BLOCKS -->
+    <div class="grid flex-grid grid--uniform grid--flush-bottom">
+      {%- assign column_width = 'medium-up--one-quarter-popup' -%}
+      {% render 'why-buy-blocks', column_width: column_width, align_text: align_text_A, height: height_C, enable_image: enable_image_5, image_class: image_class_A,
+        why_image: image_5, title: title_5, text: text_5, button_label: button_label_5, button_link: button_link_5, block_class: block_class_A %}
+      {% render 'why-buy-blocks', column_width: column_width, align_text: align_text_A, height: height_C, enable_image: enable_image_6, image_class: image_class_A,
+        why_image: image_6, title: title_6, text: text_6, button_label: button_label_6, button_link: button_link_6, block_class: block_class_A %}
+      {% render 'why-buy-blocks', column_width: column_width, align_text: align_text_A, height: height_C, enable_image: enable_image_7, image_class: image_class_A,
+        why_image: image_7, title: title_7, text: text_7, button_label: button_label_7, button_link: button_link_7, block_class: block_class_A %}
+      {% render 'why-buy-blocks', column_width: column_width, align_text: align_text_A, height: height_C, enable_image: enable_image_8, image_class: image_class_A,
+        why_image: image_8, title: title_8, text: text_8, button_label: button_label_8, button_link: button_link_8, block_class: block_class_A %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+{% comment %} code change per 4.1.1 customization. added code {% endcomment %}
+<div class="footer__item-padding footer__custom-text">
+
+  {%- if block.settings.show_footer_title -%}
+    <p class="h4 footer__title small--hide">{{ block.settings.title }}</p>
+    <button type="button" class="h4 footer__title collapsible-trigger collapsible-trigger-btn medium-up--hide" aria-controls="Footer-{{ block.id }}">
+      {{ block.settings.title }}
+      {%- render 'collapsible-icons' -%}
+    </button>
+  {%- endif -%}
+  <div
+    {% if block.settings.show_footer_title %}
+      id="Footer-{{ block.id }}" class="collapsible-content collapsible-content--small"
+    {% endif %}>
+    <div class="collapsible-content__inner">
+      <div class="footer__collapsible{% unless block.settings.show_footer_title %} footer_collapsible--disabled{% endunless %}">
+        {%- if block.settings.image != blank -%}
+          <div class="image-wrap text-spacing" style="height: 0; padding-bottom: {{ 100 | divided_by: block.settings.image.aspect_ratio }}%;">
+            {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="lazyload"
+                data-src="{{ img_url }}"
+                data-widths="[360, 540, 720, 900, 1080, 1600]"
+                data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                data-sizes="auto"
+                role="presentation"
+                alt="{{ block.settings.image.alt }}">
+            <noscript>
+              <img class="lazyloaded" src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.image.alt }}">
+            </noscript>
+          </div>
+        {%- endif -%}
+
+        {{ block.settings.text }}
+
+        {% comment %} code change per 4.1.1 customization. added  code {% endcomment %}
+        {%- if block.settings.show_copyright -%}
+          <p class="footer__small-text">
+            &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}
+            {%- if section.settings.copyright_text != blank -%}
+              {{ section.settings.copyright_text }}
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+
+        {%- if block.settings.show_facebook -%}
+          <p class="social_link">
+            <a target="_blank" rel="noopener" href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-facebook" viewBox="0 0 32 32"><path fill="#444" d="M18.56 31.36V17.28h4.48l.64-5.12h-5.12v-3.2c0-1.28.64-2.56 2.56-2.56h2.56V1.28H19.2c-3.84 0-7.04 2.56-7.04 7.04v3.84H7.68v5.12h4.48v14.08h6.4z"/></svg>
+              <span>{{ block.settings.facebook_text }}</span>
+            </a>
+          </p>
+        {%- endif -%}
+
+        {%- if block.settings.show_instagram -%}
+          <p class="social_link">
+            <a target="_blank" rel="noopener" href="{{ settings.social_instagram_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-instagram" viewBox="0 0 32 32"><path fill="#444" d="M16 3.094c4.206 0 4.7.019 6.363.094 1.538.069 2.369.325 2.925.544.738.287 1.262.625 1.813 1.175s.894 1.075 1.175 1.813c.212.556.475 1.387.544 2.925.075 1.662.094 2.156.094 6.363s-.019 4.7-.094 6.363c-.069 1.538-.325 2.369-.544 2.925-.288.738-.625 1.262-1.175 1.813s-1.075.894-1.813 1.175c-.556.212-1.387.475-2.925.544-1.663.075-2.156.094-6.363.094s-4.7-.019-6.363-.094c-1.537-.069-2.369-.325-2.925-.544-.737-.288-1.263-.625-1.813-1.175s-.894-1.075-1.175-1.813c-.212-.556-.475-1.387-.544-2.925-.075-1.663-.094-2.156-.094-6.363s.019-4.7.094-6.363c.069-1.537.325-2.369.544-2.925.287-.737.625-1.263 1.175-1.813s1.075-.894 1.813-1.175c.556-.212 1.388-.475 2.925-.544 1.662-.081 2.156-.094 6.363-.094zm0-2.838c-4.275 0-4.813.019-6.494.094-1.675.075-2.819.344-3.819.731-1.037.4-1.913.944-2.788 1.819S1.486 4.656 1.08 5.688c-.387 1-.656 2.144-.731 3.825-.075 1.675-.094 2.213-.094 6.488s.019 4.813.094 6.494c.075 1.675.344 2.819.731 3.825.4 1.038.944 1.913 1.819 2.788s1.756 1.413 2.788 1.819c1 .387 2.144.656 3.825.731s2.213.094 6.494.094 4.813-.019 6.494-.094c1.675-.075 2.819-.344 3.825-.731 1.038-.4 1.913-.944 2.788-1.819s1.413-1.756 1.819-2.788c.387-1 .656-2.144.731-3.825s.094-2.212.094-6.494-.019-4.813-.094-6.494c-.075-1.675-.344-2.819-.731-3.825-.4-1.038-.944-1.913-1.819-2.788s-1.756-1.413-2.788-1.819c-1-.387-2.144-.656-3.825-.731C20.812.275 20.275.256 16 .256z"/><path fill="#444" d="M16 7.912a8.088 8.088 0 0 0 0 16.175c4.463 0 8.087-3.625 8.087-8.088s-3.625-8.088-8.088-8.088zm0 13.338a5.25 5.25 0 1 1 0-10.5 5.25 5.25 0 1 1 0 10.5zM26.294 7.594a1.887 1.887 0 1 1-3.774.002 1.887 1.887 0 0 1 3.774-.003z"/></svg>
+              <span>{{ block.settings.instagram_text }}</span>
+            </a>
+          </p>
+        {%- endif -%}
+
+        {%- if block.settings.show_email -%}
+          <p class="social_link">
+            <a target="_blank" rel="noopener" href="mailto:{{ block.settings.email_text }}">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon" viewBox="0 0 24 24"><path d="M22,4H2A2,2,0,0,0,0,6V18a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V6A2,2,0,0,0,22,4ZM12,12.72,3.6,6H20.4Zm0,2.56,2.28-1.82,6,4.54H3.67l6.05-4.54Zm10-8v9.47l-6.11-4.58ZM8.11,12.17,2,16.75V7.28Z"></path></svg>
+              <span>{{ block.settings.email_text }}</span>
+            </a>
+          </p>
+        {%- endif -%}
+
+        {%- if block.settings.show_phone -%}
+          <p class="social_link">
+            <a target="_blank" rel="noopener" href="tel:{{ block.settings.phone_text }}">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-phone" viewBox="0 0 1024 1024"><path d="M968.8 715.3l-119-119.1c-23.5-24.4-51.9-37.2-82-37.2-29.9 0-58.5 12.8-82.7 36.9l-62 62c-3.1-1.6-6.1-3.1-8.9-4.5-7.3-3.6-14.3-7.2-20.3-11-62.9-39.9-120.2-92.2-175.3-159.7-24.3-30.7-41.1-56.5-53.3-81.9 15.7-14.7 30.5-29.7 44.5-44.1 5.9-6 12.1-12.2 18.1-18.2 24.8-24.8 37.9-53.7 37.9-83.5 0-30-13.1-58.9-37.9-83.5l-59.1-59.1c-6.7-6.7-13.1-13.2-19.7-20.1l-0.3-0.3c-12.9-13.3-26.8-27.4-40.7-40.3-23.6-23.1-51.8-35.3-81.6-35.3-29.6 0-58.1 12.3-82.4 35.5l-74.5 74.5c-30.1 29.8-47.1 66.2-50.6 108.2-4 50 5.1 102.8 28.6 165.9 35.4 96.2 88.7 185.2 167.7 280.1v0c95.7 114.4 211.3 204.9 343.4 269l0.1 0.1c51.1 24.2 119.5 52.6 195.2 57.5h0.9c4.4 0.2 8.9 0.4 13.7 0.4 54.3 0 98.1-18.8 133.8-57.5 0.6-0.7 1.4-1.5 2.2-2.6 10-11.9 21.4-23.1 33.6-34.8l2.8-2.7c11.4-10.9 20.4-19.9 28.4-28.2 23.9-24.9 36.5-53.8 36.4-83.7 0-30-12.8-58.6-37-82.8zM101.5 241.6v0c2-22.7 10.5-40.8 26.6-56.9l73.7-73.7c8.1-7.8 16.6-12 24.5-12 9.6 0 18.1 6.6 23.5 12.1l0.6 0.6c11.2 10.4 22 21.4 33.4 33l5.2 5.3c3.4 3.5 6.9 7 10.4 10.6 3.4 3.4 6.8 6.9 10.2 10.4l59.3 59.3c6.2 6.2 13.6 15.6 13.6 25s-7.4 18.8-13.6 25c-3.1 3.1-6.2 6.2-9.3 9.4-3 3.1-6.1 6.2-9.2 9.3l-4.2 4.2c-16.7 16.9-32.6 32.9-49.7 48.2l-1.7 1.7c-25.9 25.9-17 52.7-14.1 61.5 0.2 0.7 0.4 1.2 0.6 1.8l0.4 1c16.2 38.8 38.4 75 72 117.3l0.1 0.1c60.5 74.6 124.3 132.7 195.2 177.8 7.8 5.1 15.7 9.1 23.4 12.9 1.4 0.7 2.9 1.4 4.3 2.2l0.1 0.1c7.3 3.6 14.3 7.2 20.3 11l1.8 1c0.6 0.3 1.2 0.7 1.8 1 8.8 4.5 17.9 6.8 27 6.8 15.4 0 29.4-6.2 41.6-18.5l74.2-74.2c5.8-5.8 14.6-12.6 24.2-12.6 9.8 0 18.3 7.6 22.6 12.2l0.2 0.2 119.8 119.6c17.2 17.2 16.9 32.4-0.8 50.8l-0.2 0.2c-8.4 9-17.3 17.6-25.7 25.7l-2.4 2.3c-13.4 13-27.2 26.4-40.1 41.8-19.6 21-41.9 30.3-72.3 30.3-2.8 0-6-0.2-9.2-0.4-62.1-4-120.6-28.5-164.7-49.5-121.4-58.8-227.7-142-315.8-247.4-72.7-87.5-121.5-168.8-153.8-255.9-19.1-51.4-26.8-93-23.8-130.6z"></path></svg>
+              <span>{{ block.settings.phone_text }}</span>
+            </a>
+          </p>
+        {%- endif -%}
+
+        {%- if block.settings.show_phone_text -%}
+        <p class="social_link">
+          <a target="_blank" rel="noopener" href="sms:{{ block.settings.phone_text_text }}">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-phone" viewBox="0 0 1024 1024"><path d="M968.8 715.3l-119-119.1c-23.5-24.4-51.9-37.2-82-37.2-29.9 0-58.5 12.8-82.7 36.9l-62 62c-3.1-1.6-6.1-3.1-8.9-4.5-7.3-3.6-14.3-7.2-20.3-11-62.9-39.9-120.2-92.2-175.3-159.7-24.3-30.7-41.1-56.5-53.3-81.9 15.7-14.7 30.5-29.7 44.5-44.1 5.9-6 12.1-12.2 18.1-18.2 24.8-24.8 37.9-53.7 37.9-83.5 0-30-13.1-58.9-37.9-83.5l-59.1-59.1c-6.7-6.7-13.1-13.2-19.7-20.1l-0.3-0.3c-12.9-13.3-26.8-27.4-40.7-40.3-23.6-23.1-51.8-35.3-81.6-35.3-29.6 0-58.1 12.3-82.4 35.5l-74.5 74.5c-30.1 29.8-47.1 66.2-50.6 108.2-4 50 5.1 102.8 28.6 165.9 35.4 96.2 88.7 185.2 167.7 280.1v0c95.7 114.4 211.3 204.9 343.4 269l0.1 0.1c51.1 24.2 119.5 52.6 195.2 57.5h0.9c4.4 0.2 8.9 0.4 13.7 0.4 54.3 0 98.1-18.8 133.8-57.5 0.6-0.7 1.4-1.5 2.2-2.6 10-11.9 21.4-23.1 33.6-34.8l2.8-2.7c11.4-10.9 20.4-19.9 28.4-28.2 23.9-24.9 36.5-53.8 36.4-83.7 0-30-12.8-58.6-37-82.8zM101.5 241.6v0c2-22.7 10.5-40.8 26.6-56.9l73.7-73.7c8.1-7.8 16.6-12 24.5-12 9.6 0 18.1 6.6 23.5 12.1l0.6 0.6c11.2 10.4 22 21.4 33.4 33l5.2 5.3c3.4 3.5 6.9 7 10.4 10.6 3.4 3.4 6.8 6.9 10.2 10.4l59.3 59.3c6.2 6.2 13.6 15.6 13.6 25s-7.4 18.8-13.6 25c-3.1 3.1-6.2 6.2-9.3 9.4-3 3.1-6.1 6.2-9.2 9.3l-4.2 4.2c-16.7 16.9-32.6 32.9-49.7 48.2l-1.7 1.7c-25.9 25.9-17 52.7-14.1 61.5 0.2 0.7 0.4 1.2 0.6 1.8l0.4 1c16.2 38.8 38.4 75 72 117.3l0.1 0.1c60.5 74.6 124.3 132.7 195.2 177.8 7.8 5.1 15.7 9.1 23.4 12.9 1.4 0.7 2.9 1.4 4.3 2.2l0.1 0.1c7.3 3.6 14.3 7.2 20.3 11l1.8 1c0.6 0.3 1.2 0.7 1.8 1 8.8 4.5 17.9 6.8 27 6.8 15.4 0 29.4-6.2 41.6-18.5l74.2-74.2c5.8-5.8 14.6-12.6 24.2-12.6 9.8 0 18.3 7.6 22.6 12.2l0.2 0.2 119.8 119.6c17.2 17.2 16.9 32.4-0.8 50.8l-0.2 0.2c-8.4 9-17.3 17.6-25.7 25.7l-2.4 2.3c-13.4 13-27.2 26.4-40.1 41.8-19.6 21-41.9 30.3-72.3 30.3-2.8 0-6-0.2-9.2-0.4-62.1-4-120.6-28.5-164.7-49.5-121.4-58.8-227.7-142-315.8-247.4-72.7-87.5-121.5-168.8-153.8-255.9-19.1-51.4-26.8-93-23.8-130.6z"></path></svg>
+            <span>{{ block.settings.phone_text_text }} (Text)</span>
+          </a>
+        </p>
+        {%- endif -%}
+        
+      </div>
+    </div>
+  </div>
+</div>

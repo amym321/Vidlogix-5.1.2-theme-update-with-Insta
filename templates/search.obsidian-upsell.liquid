@@ -1,0 +1,228 @@
+{% comment %}
+  This file updates automatically as new features are built.
+  It is best to not edit this file directly.
+
+  When a new version is released, you will find your previous
+  customizations renamed with the extension .backup.liquid.
+  If you'd like to keep these customizations, you can apply
+  them to our updated versions.
+
+  https://text-compare.com/ is a great tool to see the differences.
+{% endcomment %}
+{% layout none %}
+
+{%- assign locale = 'strings_en' -%}
+{%- if request.locale.iso_code == 'fr' -%}
+  {%- assign locale = 'strings_fr' -%}
+{%- elsif request.locale.iso_code == 'es' -%}
+  {%- assign locale = 'strings_es' -%}
+{%- elsif request.locale.iso_code == 'de' -%}
+  {%- assign locale = 'strings_de' -%}
+{%- elsif request.locale.iso_code == 'pt_BR' -%}
+  {%- assign locale = 'strings_pt_BR' -%}
+{%- elsif request.locale.iso_code == 'pt_PT' -%}
+  {%- assign locale = 'strings_pt_PT' -%}
+{%- elsif request.locale.iso_code == 'da' -%}
+  {%- assign locale = 'strings_da' -%}
+{%- elsif request.locale.iso_code == 'nl' -%}
+  {%- assign locale = 'strings_nl' -%}
+{%- elsif request.locale.iso_code == 'it' -%}
+  {%- assign locale = 'strings_it' -%}
+{%- endif -%}
+
+<div class="upsell-cart__upsell-wrapper">
+  <div class="upsell-cart__upsell-products">
+    {%- for item in search.results -%}
+      {%- if item.object_type == 'product' -%}
+        {%- if item.available -%}
+
+          {%- liquid
+            assign product = all_products[item.handle]
+            assign variants = product.variants
+            assign variant_ids = ''
+            for v in variants
+              assign variant_ids = variant_ids | append: ',' | append: v.id | append: ':' | append: item.id
+            endfor
+            assign variant_ids = variant_ids | remove_first: ','
+
+            assign current_variant = item.selected_or_first_available_variant
+            assign current_selling_plan_allocation = current_variant.selected_selling_plan_allocation
+
+            if current_selling_plan_allocation == nil and current_variant.requires_selling_plan
+              assign current_selling_plan_allocation = current_variant.selling_plan_allocations | first
+            endif
+
+            assign current_offer = current_selling_plan_allocation | default: current_variant
+          -%}
+
+          <div class="upsell-cart__item upsell-cart__item--slider" data-id="{{ item.id }}" data-variant-id="{{ current_variant.id }}">
+            {%- capture current -%}{% cycle 1, 2, 3, 4 %}{%- endcapture -%}
+            {%- assign key = 'upsell_title_' | append: current -%}
+            <span class="upsell-cart__upsell-label">
+              {{ shop.metafields.obsidian_upsell[locale][key] }}
+            </span>
+            <div class="upsell-cart__image upsell-cart__image--small">
+              <a href="{{ item.url }}" data-variants="{{ variant_ids }}">
+                <img src="{{ item | img_url: '160x160' }}"
+                     width="70" height="70"
+                     loading="lazy"
+                     alt="{{ item.title | escape }}">
+              </a>
+            </div>
+            <div class="upsell-cart__item-details">
+              <div class="upsell-cart__item-title">
+                <a href="{{ item.url }}" class="upsell-cart__item-name upsell-cart__item-name--small" data-variants="{{ variant_ids }}">
+                  {{ item.title }}
+                </a>
+              </div>
+              <div class="upsell-cart__atc-wrap">
+
+                <a data-action-product-page href="{{ item.url }}" class="btn button upsell-cart__add-btn" data-variants="{{ variant_ids }}">
+                  {{ current_offer.price | money_without_trailing_zeros }}{% if item.price_varies %}+{% endif %} &#183; {{ shop.metafields.obsidian_upsell[locale].view }}
+                </a>
+
+                {%- liquid
+                  assign on_sale = false
+                  if current_offer.compare_at_price > current_offer.price
+                    assign on_sale = true
+                  endif
+
+                  assign multi_variant = false
+                  if variants.size > 1 or current_variant.selling_plan_allocations.size > 1
+                    assign multi_variant = true
+                  endif
+                -%}
+
+                {%- comment -%}
+                  Set items with a single variant but multiple
+                  selling plans as a single variant product until
+                  a multi-subscription implementation is added
+                  to the product risers
+                {%- endcomment-%}
+                {%- liquid
+                  if current_variant.selling_plan_allocations.size > 1 and product.has_only_default_variant
+                    assign multi_variant = false
+                  endif
+                -%}
+
+                <button type="button"
+                  class="btn button upsell-cart__add-btn"
+                  data-action-add-to-cart
+                  data-product-id="{{ item.id }}"
+                  data-multi-variant="{{ multi_variant }}"
+                  data-variant-id="{{ current_variant.id }}"
+                  {% if multi_variant %}
+                    data-riser-quick-add
+                    data-riser-trigger="quick-add-{{ item.id }}"
+                  {% endif %}
+                  data-requires-selling-plan="{{ current_variant.requires_selling_plan }}"
+                  data-selling-plan-id="{{ current_selling_plan_allocation.selling_plan.id }}"
+                >
+                  {{ current_offer.price | money_without_trailing_zeros }} &#183; {{ shop.metafields.obsidian_upsell[locale].add }}
+                </button>
+
+                {%- if on_sale -%}
+                  <span class="upsell-cart__upsell-saved">
+                    <span data-saved-percent>
+                      {%- capture saved_percent -%}{{ current_offer.compare_at_price | minus: current_offer.price | times: 100.0 | divided_by: current_offer.compare_at_price | round }}%{%- endcapture -%}
+                      {{ saved_percent }} {{ shop.metafields.obsidian_upsell[locale].discount_off }}
+                    </span>
+                    <span data-saved-dollar>
+                      {%- capture saved_dollar -%}{{ current_offer.compare_at_price | minus: current_offer.price | money_without_trailing_zeros }}{%- endcapture -%}
+                      {{ saved_dollar }} {{ shop.metafields.obsidian_upsell[locale].discount_off }}
+                    </span>
+                  </span>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick add Riser to show product form -->
+          {%- unless product.has_only_default_variant -%}
+            <div class="upsell-cart__riser"
+                 data-riser="quick-add-{{ item.id }}"
+                 data-riser-product-id="{{ item.id }}">
+              <textarea style="display: none" aria-hidden="true" aria-label="Product JSON" data-prod-json="{{ item.id }}" data-variant-json>
+                {{ product.variants | json }}
+              </textarea>
+              <div class="upsell-cart__riser-inner">
+                <button type="button" data-riser-close class="upsell-cart__close-riser" aria-label="Close">
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="upsell-icon upsell-icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
+                </button>
+                <div class="upsell-cart__riser-header">
+                  <div class="upsell-cart__riser-title upsell-cart__riser-title--product">
+                    <a href="{{ item.url }}" class="upsell-cart__riser-header-image">
+                      <img src="{{ item | img_url: '160x160' }}"
+                           data-upsell-image
+                           width="70" height="70"
+                           loading="lazy"
+                           alt="{{ item.title | escape }}">
+                    </a>
+                    <div>
+                      <div data-product-title>
+                        <a href="{{ item.url }}" data-variants="{{ variant_ids }}">
+                          {{ item.title }}
+                        </a>
+                      </div>
+
+                      <div data-product-prices data-on-sale="{{ on_sale }}">
+                        <span data-product-compare-price>
+                          {{ current_offer.compare_at_price | money }}
+                        </span>
+
+                        <span data-product-price>
+                          {{ current_offer.price | money }}
+                        </span>
+
+                        <span data-saved-amount
+                              class="upsell-cart__upsell-saved">
+                          {%- capture saved_percent -%}{{ current_offer.compare_at_price | minus: current_offer.price | times: 100.0 | divided_by: current_offer.compare_at_price | round }}%{%- endcapture -%}
+                          {%- capture saved_dollar -%}{{ current_offer.compare_at_price | minus: current_offer.price | money_without_trailing_zeros }}{%- endcapture -%}
+
+                          <span data-saved-percent>{{ saved_percent }}</span>
+                          <span data-saved-dollar>{{ saved_dollar }}</span>
+                          {{ shop.metafields.obsidian_upsell[locale].discount_off }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="upsell-cart__riser-main">
+                  {%- for option in product.options_with_values -%}
+                    {%- assign option_index = forloop.index -%}
+                    <label for="UpsellOptionLabel-{{ option.position }}-{{ product.handle }}" class="upsell-cart__variant-label">{{ option.name }}</label>
+                    <fieldset id="UpsellOptionLabel-{{ option.position }}-{{ product.handle }}" name="{{ item.title | handleize }}-{{ option.name | handleize }}">
+                      {%- for value in option.values -%}
+                        <input
+                          type="radio"
+                          data-upsell-variant
+                          data-index="option{{ option_index }}"
+                          name="{{ item.title | handleize }}-{{ option.name | handleize }}"
+                          {% if option.selected_value == value %}checked="checked"{% endif %}
+                          id="UpsellOptionValue-{{ item.title | handleize }}-{{ option.name | handleize }}-{{ value | handleize }}"
+                          value="{{ value | escape }}">
+                        <label
+                          data-upsell-variant-label
+                          for="UpsellOptionValue-{{ item.title | handleize }}-{{ option.name | handleize }}-{{ value | handleize }}">
+                          {{ value | escape }}
+                        </label>
+                      {%- endfor -%}
+                    </fieldset>
+                  {%- endfor -%}
+                </div>
+                <div class="upsell-cart__riser-footer">
+                  <button type="button" class="btn button upsell-cart__cta" data-riser-cta data-label-state={{ current_variant.available }}>
+                    <span class="upsell-cart__cta-label" data-state-true>{{ shop.metafields.obsidian_upsell[locale].add_to_cart }}</span>
+                    <span class="upsell-cart__cta-label" data-state-false>{{ shop.metafields.obsidian_upsell[locale].sold_out }}</span>
+                    <span class="upsell-cart__cta-label" data-state-unavailable>{{ shop.metafields.obsidian_upsell[locale].unavailable }}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          {%- endunless-%}
+
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>

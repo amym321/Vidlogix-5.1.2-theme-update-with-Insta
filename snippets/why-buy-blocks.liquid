@@ -1,0 +1,44 @@
+<div class="why-buy grid__item {{ column_width }} text-{{ align_text }}" data-aos="row-of-3">
+  <div class="shadow why-shadow {% if block_class != blank%} {{ block_class }} {% endif %}">  
+  {%- if enable_image -%}
+    <div style="{% if align_text == 'center' %}margin: 0 auto;{% endif %} max-width: 60px;">
+      {%- if button_link != blank -%}
+        <a href="{{ button_link }}" target="_blank">
+      {%- endif -%}
+      {%- if why_image != blank -%}
+        <div class="{% if image_class != blank%} {{ image_class }} {% endif %}">
+          <img style="margin-bottom: 50%;" src="{{ why_image.cloudinary_src | append: 'w_60,h_60,c_fill' }}" alt="Reason to Buy - {{ title}}" title="{{ title }}"/>
+        </div>
+      {%- else -%}
+        <div class="image-wrap text-spacing">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+      {%- endif -%}
+      {%- if button_link != blank -%}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  {%- if title != blank -%}
+    <h3 class="{{height}}">{{ title }}</h3>
+  {%- endif -%}
+  {%- if text != blank -%}
+    <div class="rte-setting text-spacing why-text">{{ text }}</div>
+  {%- endif -%}
+
+  {% if button_label != blank %}
+    <a href="{{ button_link }}" class="why-btn why-link"  target="_blank">
+      {{ button_label }}
+      <span style="font-size:24px; color: #F6C12F;">  &rsaquo;</span>
+    </a>
+  {% endif %}
+
+  {%- if button_label_B != blank -%}
+    <a href="{{ button_link }}" class="btn why-btn-B "  target="_blank">
+      {{ button_label_B }}
+    </a>
+  {%- endif -%}
+
+  {%- if disclaimer_text != blank -%}
+    <div class="rte-setting text-spacing why-text disclaimer-text">{{ disclaimer_text }}</div>
+  {%- endif -%}
+  </div>
+</div>

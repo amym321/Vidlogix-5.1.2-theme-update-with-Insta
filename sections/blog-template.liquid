@@ -1,0 +1,331 @@
+{% comment %} code change per 4.1.1 customization. added and modified code {% endcomment %}
+{%- paginate blog.articles by 21 -%}
+{% render 'page-block-blog-hero', block: section %}
+
+<div data-section-id="{{ section.id }}" data-section-type="blog">
+  <div class="page-width page-content">
+
+    {%- render 'breadcrumbs' -%}
+
+    <header class="section-header{% if section.settings.blog_show_tag_filter and blog.tags.size > 0 %} section-header--with-link{% endif %}">
+      <h1 class="section-header__title">
+        {{ blog.title }}
+
+        {%- if section.settings.blog_show_rss -%}
+          <a href="{{ shop.url }}{{ blog.url }}.atom" class="rss-link">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-rss" viewBox="0 0 20 20"><path fill="#444" d="M5.903 16.586a2.489 2.489 0 1 1-4.977 0 2.489 2.489 0 0 1 4.977 0zM12.956 19.075H9.43c0-4.688-3.817-8.505-8.505-8.505V7.044c6.638 0 12.031 5.393 12.031 12.031z"/><path fill="#444" d="M15.445 19.075c0-8.028-6.493-14.52-14.52-14.52V.925c10.019 0 18.15 8.131 18.15 18.15h-3.63z"/></svg>
+            <span class="icon__fallback-text">RSS</span>
+          </a>
+        {%- endif -%}
+      </h1>
+
+      {%- if section.settings.blog_show_tag_filter and blog.tags.size > 0 -%}
+        <select id="BlogTagFilter">
+          <option value="/blogs/{{ blog.handle }}">All</option>
+          {%- for tag in blog.all_tags -%}
+            {% if tag contains "_" %}{%- assign tag_starts_with = tag | slice: 0 -%}{% if tag_starts_with == "_" %}{% if tag_count %}{%- assign tag_count = tag_count | minus: 1 | at_least: 0 -%}{% endif %}{% continue %}{% endif %}{% endif %}
+            <option value="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" {% if current_tags contains tag %}selected{% endif %}>{{ tag }}</option>
+          {%- endfor -%}
+        </select>
+      {%- endif -%}
+    </header>
+
+    <div class="grid grid--uniform">
+      {%- for article in blog.articles -%}
+        {%- render 'article-grid-item', article: article, grid_item_width: 'medium-up--one-third', per_row: '3', image_size: section.settings.blog_image_size -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+
+  </div>
+</div>
+
+{%- endpaginate -%} 
+
+{% schema %}
+  {
+    "name": "Blog pages",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "blog_show_tag_filter",
+        "label": "Show tag filter"
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_rss",
+        "label": "Show RSS link"
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_tags",
+        "label": "Show tags"
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_date",
+        "label": "Show date",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_comments",
+        "label": "Show comment count",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_author",
+        "label": "Show author"
+      },
+      {
+        "type": "checkbox",
+        "id": "blog_show_excerpt",
+        "label": "Show excerpt"
+      },
+      {
+        "type": "select",
+        "id": "blog_image_size",
+        "label": "Image size",
+        "default": "wide",
+        "options": [
+          {
+            "value": "natural",
+            "label": "Natural"
+          },
+          {
+            "value": "square",
+            "label": "Square (1:1)"
+          },
+          {
+            "value": "landscape",
+            "label": "Landscape (4:3)"
+          },
+          {
+            "value": "portrait",
+            "label": "Portrait (2:3)"
+          },
+          {
+            "value": "wide",
+            "label": "Wide (16:9)"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Hero Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "parallax",
+        "label": "Enable parallax",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Heading",
+        "default": "Two line title image"
+      },
+      {
+        "type": "range",
+        "id": "title_size",
+        "label": "Heading text size",
+        "default": 80,
+        "min": 40,
+        "max": 100,
+        "unit": "px"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "And optional subtext"
+      },
+      {
+        "type": "checkbox",
+        "id": "chat_widget",
+        "label": "First button opens the chat widget. Defaults to Contact page for now",
+        "default": false,
+        "info": "Leave link url below blank if you'd like to open the chat widget."
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text",
+        "default": "Optional button"
+      },
+      {
+        "type": "url",
+        "id": "link_2",
+        "label": "Second link"
+      },
+      {
+        "type": "text",
+        "id": "link_text_2",
+        "label": "Second link text 2"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Buttons",
+        "default": "rgba(0,0,0,0)"
+      },
+      {
+        "type": "select",
+        "id": "text_align",
+        "label": "Text alignment",
+        "default": "vertical-center horizontal-center",
+        "options": [
+          {
+            "value": "vertical-center horizontal-left",
+            "label": "Center left"
+          },
+          {
+            "value": "vertical-center horizontal-center",
+            "label": "Center"
+          },
+          {
+            "value": "vertical-center horizontal-right",
+            "label": "Center right"
+          },
+          {
+            "value": "vertical-bottom horizontal-left",
+            "label": "Bottom left"
+          },
+          {
+            "value": "vertical-bottom horizontal-center",
+            "label": "Bottom center"
+          },
+          {
+            "value": "vertical-bottom horizontal-right",
+            "label": "Bottom right"
+          }
+        ]
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "focal_point",
+        "label": "Image focal point",
+        "info": "Used to keep the subject of your photo in view.",
+        "default": "center center",
+        "options": [
+          {
+            "value": "20% 0",
+            "label": "Top left"
+          },
+          {
+            "value": "top center",
+            "label": "Top center"
+          },
+          {
+            "value": "80% 0",
+            "label": "Top right"
+          },
+          {
+            "value": "20% 50%",
+            "label": "Left"
+          },
+          {
+            "value": "center center",
+            "label": "Center"
+          },
+          {
+            "value": "80% 50%",
+            "label": "Right"
+          },
+          {
+            "value": "20% 100%",
+            "label": "Bottom left"
+          },
+          {
+            "value": "bottom center",
+            "label": "Bottom center"
+          },
+          {
+            "value": "80% 100%",
+            "label": "Bottom right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "section_height",
+        "label": "Desktop height",
+        "default": "650px",
+        "options": [
+          {
+            "label": "Natural",
+            "value": "natural"
+          },
+          {
+            "label": "450px",
+            "value": "450px"
+          },
+          {
+            "label": "550px",
+            "value": "550px"
+          },
+          {
+            "label": "650px",
+            "value": "650px"
+          },
+          {
+            "label": "750px",
+            "value": "750px"
+          },
+          {
+            "label": "Full screen",
+            "value": "100vh"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "mobile_height",
+        "label": "Mobile height",
+        "default": "auto",
+        "info": "Not used if desktop height is set to natural",
+        "options": [
+          {
+            "label": "Auto",
+            "value": "auto"
+          },
+          {
+            "label": "250px",
+            "value": "250px"
+          },
+          {
+            "label": "300px",
+            "value": "300px"
+          },
+          {
+            "label": "400px",
+            "value": "400px"
+          },
+          {
+            "label": "500px",
+            "value": "500px"
+          },
+          {
+            "label": "Full screen",
+            "value": "100vh"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

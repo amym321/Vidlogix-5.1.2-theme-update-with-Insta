@@ -1,0 +1,22 @@
+{% comment %} code change per 4.1.1 customization. added/modified {% endcomment %}
+{% unless template == 'page.charity' %}
+  {% render 'page-block-smart-header' %}
+{% endunless %}
+
+<div class="page-width page-width--narrow page-content default-page {% if template == 'page.charity' %} charity {% endif %}">
+  {%- render 'breadcrumbs' -%}
+  {% comment %}<header class="section-header">
+    <h1 class="section-header__title">{{ page.title }}</h1>
+  </header>{% endcomment %}
+
+  <div class="rte rte--nomargin">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page",
+  "tag": "section"
+}
+{% endschema %}

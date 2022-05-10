@@ -1,0 +1,75 @@
+<div class="container-top">
+  <a id="button-top" class="hide">
+    <div class="icon-top icon--arrow-up"   >
+      <img width="50px"  src="https://cdn.shopify.com/s/files/1/0056/9632/3651/files/arow-up-2.png?v=1641920754">
+    </div>
+  </a>
+</div>
+
+<script>
+  //hide/show button on scroll up/down
+  let scrollPos = 0;
+  var btn = $('#button-top');
+
+  window.addEventListener("scroll", function () {
+    // detects new state and compares it with the new one
+    if (document.body.getBoundingClientRect().top > scrollPos  &&  $(window).scrollTop() > 800) {
+      btn.addClass('show');
+    } else  {
+      btn.removeClass('show');
+    }
+    // saves the new position for iteration.
+    scrollPos = document.body.getBoundingClientRect().top;
+  });
+ 
+  
+  btn.on('click', function(e) {
+    e.preventDefault();
+    $('html, body').animate({scrollTop:0}, '300');
+  });
+</script>
+  
+<Style>
+  #button-top {
+    display: inline-block;
+    background-color: #C0C0C0;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border-radius: 100%; 
+    position: fixed;
+    bottom: 28px;
+    right: 26px;
+    transition: background-color .2s, opacity .3s, visibility .3s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    display: flex !important;
+    justify-content: center;
+  }
+
+  #button-top::after {
+    color: #fff;
+  }
+  #button-top:hover {
+    cursor: pointer;
+    background-color:#949393;
+  }
+  #button-top:active {
+    background-color: #555;
+  }
+  #button-top.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  .icon-top .fill_color{
+    fill:#fff;
+  }
+  .icon-top {
+    position: absolute;
+    top: 55%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  
+</Style>

@@ -1,0 +1,35 @@
+{% comment %} code change per 4.1.1 customization. New file {% endcomment %}
+<div class="smart-header">
+    <div class="page-width">
+      <header class="grid flex-grid flex-grid--start">
+        <div class="smart-header__text grid__item small--one-half medium-up--two-thirds">
+          <h1 class="section-header__title">
+            {% if block.settings.page_title != blank %}
+              {{ block.settings.page_title }}
+            {% else %}
+              {{ page.title }}
+            {% endif %}
+          </h1>
+          {% if block.settings.page_description != blank %}
+            <div class="smart-header__description">
+              {{ block.settings.page_description }}
+            </div>
+          {% endif %}
+        </div>
+        <div class="smart-header__contact grid__item small--one-half medium-up--one-third">
+          {% if settings.button_chat == true %}
+          <a href="/pages\/contact" >
+          {% elsif settings.help_link != blank %}
+            <a href="{{ settings.help_link }}">
+          {% endif %}
+          <span class="smart-header__bold">{{ settings.help_text_bold }}</span>
+          <span class="smart-header__help-text">{{ settings.help_text }}</span>
+          {% if settings.help_link != blank or settings.button_chat == true %}
+            </a>
+          {% endif %}
+          {{ settings.help_image | img_url: '140x140' | img_tag }}
+        </div>
+      </header>
+    </div>
+  </div>
+  
