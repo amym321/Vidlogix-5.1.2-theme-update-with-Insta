@@ -302,7 +302,7 @@
       "sale_price": "Preço promocional",
       "regular_price": "Preço normal",
       "from_text_html": "A partir de {{ price }}",
-      "recent_products": "Visto recentemente",
+      "recent_products": "Visto Recentemente",
       "reviews": "Avaliações"
     },
     "product": {
