@@ -91,6 +91,11 @@
       {%- render 'announcement-bar', section: section -%}
     {%- endif -%}
   
+    {% comment %} Recently Viewed modal added - am {% endcomment %}
+    {% if section.settings.recently_viewed_header %}
+      {% render 'recently-viewed-modal', section: section, recent_count_header: section.settings.recent_count_header  %}
+    {% endif %}
+  
     {%- unless overlay_header -%}
       {%- if section.settings.show_locale_selector or section.settings.show_currency_selector or section.settings.toolbar_social or section.settings.toolbar_menu != blank -%}
         {%- render 'toolbar',
@@ -359,6 +364,28 @@
           "max": 10,
           "step": 1,
           "unit": "s"
+        },
+        {
+          "type": "header",
+          "content": "Recently Viewed"
+        },
+        {
+          "type": "checkbox",
+          "id": "recently_viewed_header",
+          "label": "Include Recently Viewed icon that triggers Recently Viewed Popup"
+        },
+        {
+          "type": "paragraph",
+          "content": "Recently viewed products are only visible when browsing outside of the editor"
+        },
+        {
+          "type": "range",
+          "id": "recent_count_header",
+          "label": "Number of recent products",
+          "default": 4,
+          "min": 2,
+          "max": 10,
+          "step": 1
         },
         {
           "type": "header",
