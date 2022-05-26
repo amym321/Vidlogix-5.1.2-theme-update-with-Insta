@@ -2,6 +2,7 @@
 
 {% assign recent_view_modal = true %}
 
+{% comment %} modal with RV history {% endcomment %}
 <div id="recent-view-popup" class="why-modal">
   <div class="why-buy-popup" style="color:black;">
     <div id="recent-outer-modal" class="modal modal--square modal--mobile-friendly">
@@ -22,18 +23,119 @@
   </div>
 </div>
 
+{% comment %} modal with no RV history {% endcomment %}
+<div id="none-recent-popup" class="why-modal">
+  <div class="why-buy-popup" style="color:black;">
+    <div id="recent-outer-modal" class="modal modal--square modal--mobile-friendly">
+      <div id="recent-modal-inner" class="modal__inner">
+        <div class="modal__centered ">
+          <span class="close-recent-popup">&times;</span>
+          <div  class="newsletter">
+            <div class="rv-message" >
+              <img class="rv-message-image" src="https://cdn.shopify.com/s/files/1/0056/9632/3651/files/Recently_Viewed_-_with_Items_7.png?v=1653228177">
+            </div>
+            <div class="rv-collection">
+              <div class="theme-block why-rich-text" >
+                <a href="{{ collections["best-sellers"].url }}">
+                  <h2 class="section-header__title">Best Sellers</h2>
+                </a>
+                <a href="{{ collections["best-sellers"].url }}">
+                  <img class="open-page" src="https://cdn.shopify.com/s/files/1/0056/9632/3651/files/open_new_page_7.png?v=1653226737" alt="open-page">
+                </a>
+              </div>
+              <div data-section-type="collection-template">
+                <div class="page-width{% if section.settings.mobile_scrollable %} page-width--flush-small{% endif %}">
+                  <div{% if section.settings.mobile_scrollable %} class="grid-overflow-wrapper"{% endif %}>
+                    <div class="grid grid--uniform"{% if section.settings.mobile_scrollable %} data-aos="overflow__animation"{% endif %}>
+                      {% comment %} {%- assign grid_item_width = 'medium-up--one-half' -%} {% endcomment %}
+                      {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+                      {% comment %}{%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+                      {% endcomment %}
+                      {%- assign product_limit = 3 -%}
+                      {%- assign collection = collections["best-sellers"] -%}
+
+                      {%- unless collections["best-sellers"].empty? or collections["best-sellers"].products_count == 0 -%}
+                        {%- for product in collections["best-sellers"].products limit: product_limit -%}
+                          {%- render 'product-grid-item', product: product, grid_item_width: grid_item_width, per_row: per_row -%}
+                        {%- endfor -%}
+                      {%- endunless -%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% style %}
+  .rv-collection {
+    display:inline-block; 
+    width:45%; 
+    align-items: center; 
+    float: right;
+    padding-right: 10px;
+  }
+
+  .rv-message {
+    display:inline-block; 
+    width:40%;
+  }
+
+  .rv-message-image {
+    position: absolute; 
+    bottom:0; 
+    height: 90%;
+    padding-left:40px; 
+  }
+  @media only screen and (max-width: 1077px) {
+    .rv-message-image {
+      height: 75%;
+    }
+  }
+  @media only screen and (max-width: 940px) {
+    .rv-message {
+      width:45%; 
+    }
+    .rv-collection {
+      width:55%; 
+    }
+    .rv-message-image {
+      height: 55%;
+    }
+  }
+  @media only screen and (min-width: 1225px) {
+    .rv-message {
+      width:50%; 
+    }
+    .rv-collection {
+      width:50%; 
+    }
+  }
+  @media only screen and (min-width: 1370px) {
+    .rv-message-image {
+      max-height: 90%;
+    }
+  }
+  @media only screen and (min-width: 1550px) {
+    .rv-collection {
+      width:55%; 
+    }
+  }
+
   @media only screen and (min-width: 769px) {
-    #recent-view-popup .modal__inner {
+    #recent-view-popup .modal__inner,
+    #none-recent-popup .modal__inner {
       max-width: 1200px;
    }
   }
 
-  #recent-view-popup .modal {
-    /*position:absolute !important;*/
-    /*background-color:#ffffff00;*/
+  #recent-view-popup .modal,
+  #none-recent-popup  .modal {
     align-items: center; 
-    /*bottom:unset;*/  
   }
 
   #recent-view-popup .modal__inner {
@@ -41,21 +143,54 @@
      min-width: 60%;
   }
 
-  #recent-view-popup .modal .index-section--recently {
+  #none-recent-popup .modal__inner {
+     border: solid 2px darkgray;
+     min-width: 80%;
+  }
+
+  #recent-view-popup .modal .index-section--recently,
+  #none-recent-popup .modal .index-section--recently {
     padding: 0 20px;
   }
 
-  #recent-view-popup .section-header__title {
+  #none-recent-popup .why-buy-popup .modal__centered {
+    background: linear-gradient(to right, #eee 40%, #ffffff00 40%);
+  }
+
+  #recent-view-popup .section-header__title,
+  #none-recent-popup .section-header__title {
     text-align: left;
     border-top: none;
   }
 
-  #recent-view-popup .section-header {
+  #recent-view-popup .section-header,
+  #none-recent-popup .section-header {
     display: none;
   }
 
-  #recent-view-popup .why-rich-text {
-    padding-bottom: 10px;
+  #recent-view-popup .why-rich-text,
+  #none-recent-popup .why-rich-text {
+    padding-bottom: 20px;
+  }
+
+  #recent-view-popup h2,
+  #none-recent-popup h2 {
+    font-size:16px;
+  }
+
+  #none-recent-popup .open-page {
+    height: 18px;
+    transform: translateY(4px);
+    display: inline;
+    padding-left: 8px;
+  }
+
+  #none-recent-popup .close-recent-popup {
+    display:inline-block;
+  }
+
+  #none-recent-popup .quick-product__btn {
+    display:none !important;
   }
 
 {% endstyle %}

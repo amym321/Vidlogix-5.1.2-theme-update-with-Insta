@@ -17,6 +17,7 @@ window.onload = function(){
   var mediaLinkDesktop = [];
   // Recently Viewed popup
   var recentViewModal = document.getElementById("recent-view-popup"); // recent view with history
+  var recentViewModal2 = document.getElementById("none-recent-popup"); // no recent view avalable
   var recentViewBtn = document.getElementById("recent-view-btn");    // trigger
 
   Object.keys(mediaBtnDesktop).forEach((key) => {
@@ -49,10 +50,13 @@ window.onload = function(){
     }
   }
 
-  if (recentViewBtn != null) {
+  if (recentViewBtn != null || recentViewBtn2 != null) {
     if (Object.keys(theme.recentlyViewed.recent).length <= 1 && theme.recentlyViewed.recent.constructor === Object) {
-      // no history, so don't open
-      console.log('12) no history');
+      // add "NO RV history" popup here
+      recentViewBtn.onclick = function() {
+        recentViewModal2.style.display = "flex";
+      }
+      // console.log('12) no history');
     } else {
       recentViewBtn.onclick = function() {
         recentViewModal.style.display = "flex";
@@ -107,6 +111,9 @@ window.onload = function(){
     }
     if (recentViewModal != null) {
       recentViewModal.style.display = "none";
+    }
+    if (recentViewModal2 != null) {
+      recentViewModal2.style.display = "none";
     }
   }
 
