@@ -123,6 +123,7 @@
       "note": "Instrucciones especiales para el vendedor",
       "subtotal": "Subtotal",
       "discounts": "Descuentos",
+      "shipping": "Envío",
       "shipping_at_checkout": "Los códigos de descuento, los costes de envío y los impuestos se añaden durante el pago.",
       "update": "Actualizar carrito",
       "checkout": "Finalizar pedido",

@@ -123,6 +123,7 @@
       "note": "Order note",
       "subtotal": "Subtotal",
       "discounts": "Discounts",
+      "shipping": "Shipping",
       "shipping_at_checkout": "Shipping, taxes, and discount codes calculated at checkout.",
       "update": "Update cart",
       "checkout": "Check out",

@@ -123,6 +123,7 @@
       "note": "Besondere Hinweise an den Verkäufer",
       "subtotal": "Zwischensumme",
       "discounts": "Rabatte",
+      "shipping": "Versand",
       "shipping_at_checkout": "Rabattcodes, Versandkosten und Steuern werden bei der Bezahlung berechnet.",
       "update": "Einkaufswagen aktualisieren",
       "checkout": "Zur Kasse",
