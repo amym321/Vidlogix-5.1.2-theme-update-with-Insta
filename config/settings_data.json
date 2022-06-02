@@ -24,7 +24,7 @@
     "color_drawer_border": "#f2f2f2",
     "color_drawer_button": "#f6c12f",
     "color_drawer_button_text": "#ffffff",
-    "color_modal_overlays": "#212b36",
+    "color_modal_overlays": "#e6e6e6",
     "color_image_text": "#0f0f0f",
     "color_image_overlay": "#212b36",
     "color_image_overlay_opacity": 0,
@@ -329,31 +329,6 @@
         "type": "shopify:\/\/apps\/sellerbird-bundles\/blocks\/sb-product-bundler\/d5a8a777-b4ab-4e90-acb2-28d28663614e",
         "disabled": false,
         "settings": {
-        }
-      },
-      "16275430657926763838": {
-        "type": "shopify:\/\/apps\/incentivize-cart-upsell\/blocks\/upsell-cart\/ae66766b-0b4d-4801-a38e-5692b1140cb1",
-        "disabled": true,
-        "settings": {
-          "upsell_auto_rotate_upsells": true,
-          "upsell_auto_rotate_speed": "4000",
-          "upsell_image_size": "small",
-          "upsell_action_type": "add_to_cart",
-          "upsell_checkout_action": "checkout",
-          "upsell_color_drawer": "#ffffff",
-          "upsell_color_borders": "#e9e9e9",
-          "upsell_color_text": "#333333",
-          "upsell_color_button": "#f6c03f",
-          "upsell_color_button_text": "#ffffff",
-          "upsell_color_shipping_bar": "#004f47",
-          "upsell_color_disclaimer": "#999999",
-          "upsell_color_discount_price": "#fb4145",
-          "upsell_save_type": "dollar",
-          "upsell_continue_shopping": "https:\/\/www.vidlogix.com\/collections\/best-sellers?offset=0&sortBy=bestselling",
-          "upsell_notes_enable": false,
-          "upsell_terms_enable": false,
-          "upsell_terms_page": "returns",
-          "upsell_custom_css": ""
         }
       }
     }
