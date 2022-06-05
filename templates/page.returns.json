@@ -112,7 +112,6 @@
         },
         "16400379824b518b3b-1": {
           "type": "question",
-          "disabled": true,
           "settings": {
             "title": "Important details",
             "map_text": "",
