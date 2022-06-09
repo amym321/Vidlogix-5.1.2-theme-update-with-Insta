@@ -1,1 +1,283 @@
-{"sections":{"slideshow":{"type":"slideshow","blocks":{"slideshow-0":{"type":"image","settings":{"top_subheading":"","title":"New Ring Gear","title_size":42,"subheading":"Free 2-day shipping","chat_widget":false,"link":"https:\/\/www.vidlogix.com\/collections\/vendors?q=Ring","link_text":"Shop Now","link_2":"","link_text_2":"","color_accent":"#f6c12f","text_color":"#000000","text_align":"vertical-center horizontal-left","image":"shopify:\/\/shop_images\/Ring_Alarm_Gen2_59094fe8-744c-47c7-a6a3-d29799f5ed3e.jpg","overlay_opacity":4,"focal_point":"80% 100%"}},"slideshow-1":{"type":"image","settings":{"top_subheading":"","title":"Nest Wifi","title_size":42,"subheading":"The easy to set up, whole‑home Wi‑Fi.","chat_widget":false,"link":"shopify:\/\/products\/google-nest-wifi-snow","link_text":"Shop Now","link_2":"","link_text_2":"","color_accent":"#f6c12f","text_color":"#000000","text_align":"vertical-center horizontal-left","image":"shopify:\/\/shop_images\/Google-Nest-Wifi.jpg","overlay_opacity":0,"focal_point":"bottom center"}}},"block_order":["slideshow-0","slideshow-1"],"settings":{"section_height":"550px","mobile_height":"250px","parallax":false,"style":"bars","autoplay":true,"autoplay_speed":7}},"1637960314fb05cbb5":{"type":"collection-brands","blocks":{"1637960314a0c7a2fe-0":{"type":"featured_collection","settings":{"collection":"arlo"}},"1637960314a0c7a2fe-1":{"type":"featured_collection","settings":{"collection":"google"}},"1637960314a0c7a2fe-2":{"type":"featured_collection","settings":{"collection":"august"}},"4547c7cc-117b-4333-bff8-b00736142791":{"type":"featured_collection","settings":{"collection":"eufy"}},"874cb8c7-f49d-469d-a8ec-225a6d3253ee":{"type":"featured_collection","settings":{"collection":"invid"}},"ef1a8645-c7d8-491f-9e33-472bcccd2f95":{"type":"featured_collection","settings":{"collection":"ring"}}},"block_order":["1637960314a0c7a2fe-0","1637960314a0c7a2fe-1","1637960314a0c7a2fe-2","4547c7cc-117b-4333-bff8-b00736142791","874cb8c7-f49d-469d-a8ec-225a6d3253ee","ef1a8645-c7d8-491f-9e33-472bcccd2f95"],"settings":{"title":"Featured Brands","textbit":"All your favorite brands. Smart on their own. Smarter together.","grid":3,"more_link":"shopify:\/\/pages\/store-brands"}},"16374663436f00eb2c":{"type":"background-video-text","settings":{"subtitle":"Lifetime Support","title":"Expert advice, whenever you need it.","text":"<p>Curious about our products or not sure what you need? Talk to one of our smart home specialists anytime. It’s free.<\/p>","button_label":"Get Help","button_link":"shopify:\/\/pages\/contact","button_chat":false,"video_url":"https:\/\/vimeo.com\/434829420","color_border":"#f4f4f4","layout":"left","height":550}},"blog-posts":{"type":"blog-posts","settings":{"title":"From the journal","blog":"news","post_limit":3,"blog_show_tags":false,"blog_show_date":true,"blog_show_comments":false,"blog_show_author":false,"view_all":true,"blog_image_size":"wide","divider":false,"background_color":"#f4f4f4"}},"16374606876c4b0894":{"type":"featured-collection","settings":{"title":"Best Sellers","home_featured_products":"best-sellers","per_row":4,"rows":1,"mobile_scrollable":true,"view_all":true,"divider":false}},"163746679950095452":{"type":"testimonials","blocks":{"163746679909a0cbe2-0":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>Had an absolutely excellent experience with Jesse. He was helpful, friendly, listened & made great recommendations<\/p>","image":"shopify:\/\/shop_images\/UGC-1.png","author":"Natasha A.","author_info":""}},"163746679909a0cbe2-1":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>The reason I look to you for electronic equipment is customer service, period. Your sales people know their equipment.<\/p>","image":"shopify:\/\/shop_images\/UGC-4.png","author":"Karen F.","author_info":""}},"163746679909a0cbe2-2":{"type":"testimonial","settings":{"icon":"quote","testimonial":"<p>Vidlogix has helped give me peace of mind that my home and family are safe, even when I’m away on business.<\/p>","image":"shopify:\/\/shop_images\/UGC-2.png","author":"Sam T.","author_info":""}},"163746679909a0cbe2-3":{"type":"testimonial","settings":{"icon":"5-stars","testimonial":"<p>It's nice dealing with actual humans with email. Never have any worries when something comes up. You guys rock<\/p>","image":"shopify:\/\/shop_images\/UGC-6.png","author":"Diane K.","author_info":""}}},"block_order":["163746679909a0cbe2-0","163746679909a0cbe2-1","163746679909a0cbe2-2","163746679909a0cbe2-3"],"settings":{"title":"Happy Customers","align_text":"center","more_link":"\/pages\/reviews","link_text":"Read All Reviews","round_images":true,"color_background":"#f9f9f9","color_text":"#1c1d1d"}},"16374675471ddb7cfa":{"type":"newsletter","blocks":{"163746754725d46185-0":{"type":"title","settings":{"title":"Never miss an offer"}},"163746754725d46185-1":{"type":"text","settings":{"text":"<p>Text <strong>SMARTHOME<\/strong> to 289-797-3165 to receive no B.S. deals & offers.<br\/>Plus, enter to win a Sonos Arc Soundbar.<\/p>"}},"163746754725d46185-2":{"type":"form","settings":{}}},"block_order":["163746754725d46185-0","163746754725d46185-1","163746754725d46185-2"],"settings":{"color_background":"#ffffff","color_text":"#1c1d1d","unsubscribe_text":"Contest Rules","unsubscribe_url":"shopify:\/\/pages\/contest","show_divider":false}}},"order":["slideshow","1637960314fb05cbb5","16374663436f00eb2c","blog-posts","16374606876c4b0894","163746679950095452","16374675471ddb7cfa"]}
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slideshow-0": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "New Ring Gear",
+            "title_size": 42,
+            "subheading": "Free 2-day shipping",
+            "chat_widget": false,
+            "link": "https:\/\/www.vidlogix.com\/collections\/vendors?q=Ring",
+            "link_text": "Shop Now",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "#f6c12f",
+            "text_color": "#000000",
+            "text_align": "vertical-center horizontal-left",
+            "image": "shopify:\/\/shop_images\/Ring_Alarm_Gen2_59094fe8-744c-47c7-a6a3-d29799f5ed3e.jpg",
+            "overlay_opacity": 4,
+            "focal_point": "80% 100%"
+          }
+        },
+        "slideshow-1": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "Nest Wifi",
+            "title_size": 42,
+            "subheading": "The easy to set up, whole‑home Wi‑Fi.",
+            "chat_widget": false,
+            "link": "shopify:\/\/products\/google-nest-wifi-snow",
+            "link_text": "Shop Now",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "#f6c12f",
+            "text_color": "#000000",
+            "text_align": "vertical-center horizontal-left",
+            "image": "shopify:\/\/shop_images\/Google-Nest-Wifi.jpg",
+            "overlay_opacity": 0,
+            "focal_point": "bottom center"
+          }
+        },
+        "a18b8778-dac9-4bcc-870e-56d058692b80": {
+          "type": "image",
+          "settings": {
+            "top_subheading": "",
+            "title": "",
+            "title_size": 80,
+            "subheading": "",
+            "chat_widget": false,
+            "link": "https:\/\/www.vidlogix.com\/products\/vosker-v300",
+            "link_text": "",
+            "link_2": "",
+            "link_text_2": "",
+            "color_accent": "rgba(0,0,0,0)",
+            "text_color": "#000000",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify:\/\/shop_images\/Homepage-Banners-Outdoor.png",
+            "overlay_opacity": 0,
+            "focal_point": "center center"
+          }
+        }
+      },
+      "block_order": [
+        "slideshow-0",
+        "slideshow-1",
+        "a18b8778-dac9-4bcc-870e-56d058692b80"
+      ],
+      "settings": {
+        "section_height": "550px",
+        "mobile_height": "250px",
+        "parallax": false,
+        "style": "bars",
+        "autoplay": true,
+        "autoplay_speed": 7
+      }
+    },
+    "1637960314fb05cbb5": {
+      "type": "collection-brands",
+      "blocks": {
+        "1637960314a0c7a2fe-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "arlo"
+          }
+        },
+        "1637960314a0c7a2fe-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "google"
+          }
+        },
+        "1637960314a0c7a2fe-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "august"
+          }
+        },
+        "4547c7cc-117b-4333-bff8-b00736142791": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "eufy"
+          }
+        },
+        "874cb8c7-f49d-469d-a8ec-225a6d3253ee": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "invid"
+          }
+        },
+        "ef1a8645-c7d8-491f-9e33-472bcccd2f95": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "ring"
+          }
+        }
+      },
+      "block_order": [
+        "1637960314a0c7a2fe-0",
+        "1637960314a0c7a2fe-1",
+        "1637960314a0c7a2fe-2",
+        "4547c7cc-117b-4333-bff8-b00736142791",
+        "874cb8c7-f49d-469d-a8ec-225a6d3253ee",
+        "ef1a8645-c7d8-491f-9e33-472bcccd2f95"
+      ],
+      "settings": {
+        "title": "Featured Brands",
+        "textbit": "All your favorite brands. Smart on their own. Smarter together.",
+        "grid": 3,
+        "more_link": "shopify:\/\/pages\/store-brands"
+      }
+    },
+    "16374663436f00eb2c": {
+      "type": "background-video-text",
+      "settings": {
+        "subtitle": "Lifetime Support",
+        "title": "Expert advice, whenever you need it.",
+        "text": "<p>Curious about our products or not sure what you need? Talk to one of our smart home specialists anytime. It’s free.<\/p>",
+        "button_label": "Get Help",
+        "button_link": "shopify:\/\/pages\/contact",
+        "button_chat": false,
+        "video_url": "https:\/\/vimeo.com\/434829420",
+        "color_border": "#f4f4f4",
+        "layout": "left",
+        "height": 550
+      }
+    },
+    "blog-posts": {
+      "type": "blog-posts",
+      "settings": {
+        "title": "From the journal",
+        "blog": "news",
+        "post_limit": 3,
+        "blog_show_tags": false,
+        "blog_show_date": true,
+        "blog_show_comments": false,
+        "blog_show_author": false,
+        "view_all": true,
+        "blog_image_size": "wide",
+        "divider": false,
+        "background_color": "#f4f4f4"
+      }
+    },
+    "16374606876c4b0894": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Best Sellers",
+        "home_featured_products": "best-sellers",
+        "per_row": 4,
+        "rows": 1,
+        "mobile_scrollable": true,
+        "view_all": true,
+        "divider": false
+      }
+    },
+    "163746679950095452": {
+      "type": "testimonials",
+      "blocks": {
+        "163746679909a0cbe2-0": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Had an absolutely excellent experience with Jesse. He was helpful, friendly, listened & made great recommendations<\/p>",
+            "image": "shopify:\/\/shop_images\/UGC-1.png",
+            "author": "Natasha A.",
+            "author_info": ""
+          }
+        },
+        "163746679909a0cbe2-1": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>The reason I look to you for electronic equipment is customer service, period. Your sales people know their equipment.<\/p>",
+            "image": "shopify:\/\/shop_images\/UGC-4.png",
+            "author": "Karen F.",
+            "author_info": ""
+          }
+        },
+        "163746679909a0cbe2-2": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "quote",
+            "testimonial": "<p>Vidlogix has helped give me peace of mind that my home and family are safe, even when I’m away on business.<\/p>",
+            "image": "shopify:\/\/shop_images\/UGC-2.png",
+            "author": "Sam T.",
+            "author_info": ""
+          }
+        },
+        "163746679909a0cbe2-3": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>It's nice dealing with actual humans with email. Never have any worries when something comes up. You guys rock<\/p>",
+            "image": "shopify:\/\/shop_images\/UGC-6.png",
+            "author": "Diane K.",
+            "author_info": ""
+          }
+        }
+      },
+      "block_order": [
+        "163746679909a0cbe2-0",
+        "163746679909a0cbe2-1",
+        "163746679909a0cbe2-2",
+        "163746679909a0cbe2-3"
+      ],
+      "settings": {
+        "title": "Happy Customers",
+        "align_text": "center",
+        "more_link": "\/pages\/reviews",
+        "link_text": "Read All Reviews",
+        "round_images": true,
+        "color_background": "#f9f9f9",
+        "color_text": "#1c1d1d"
+      }
+    },
+    "16374675471ddb7cfa": {
+      "type": "newsletter",
+      "blocks": {
+        "163746754725d46185-0": {
+          "type": "title",
+          "settings": {
+            "title": "Never miss an offer"
+          }
+        },
+        "163746754725d46185-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Text <strong>SMARTHOME<\/strong> to 289-797-3165 to receive no B.S. deals & offers.<br\/>Plus, enter to win a Sonos Arc Soundbar.<\/p>"
+          }
+        },
+        "163746754725d46185-2": {
+          "type": "form",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "163746754725d46185-0",
+        "163746754725d46185-1",
+        "163746754725d46185-2"
+      ],
+      "settings": {
+        "color_background": "#ffffff",
+        "color_text": "#1c1d1d",
+        "unsubscribe_text": "Contest Rules",
+        "unsubscribe_url": "shopify:\/\/pages\/contest",
+        "show_divider": false
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "1637960314fb05cbb5",
+    "16374663436f00eb2c",
+    "blog-posts",
+    "16374606876c4b0894",
+    "163746679950095452",
+    "16374675471ddb7cfa"
+  ]
+}
