@@ -5,6 +5,7 @@
       "blocks": {
         "slideshow-0": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "top_subheading": "",
             "title": "New Ring Gear",
@@ -25,6 +26,7 @@
         },
         "slideshow-1": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "top_subheading": "",
             "title": "Nest Wifi",
@@ -45,23 +47,22 @@
         },
         "a18b8778-dac9-4bcc-870e-56d058692b80": {
           "type": "image",
-          "disabled": true,
           "settings": {
             "top_subheading": "",
-            "title": "Save Up To 10%",
+            "title": "",
             "title_size": 42,
-            "subheading": "Vosker V300-US",
+            "subheading": "",
             "chat_widget": false,
             "link": "https:\/\/www.vidlogix.com\/products\/vosker-v300",
-            "link_text": "Buy Now",
+            "link_text": "",
             "link_2": "",
             "link_text_2": "",
             "color_accent": "#f6c12f",
             "text_color": "#ffffff",
             "text_align": "vertical-center horizontal-left",
-            "image": "shopify:\/\/shop_images\/Homepage-Banners-Desktop-2-wo-Text.png",
+            "image": "shopify:\/\/shop_images\/Homepage-Banners-Outdoor_dfaf9b09-79f9-4d94-88a3-7176752fb6df.png",
             "overlay_opacity": 0,
-            "focal_point": "80% 50%"
+            "focal_point": "center center"
           }
         }
       },
