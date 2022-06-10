@@ -61,7 +61,6 @@
             "text_color": "#ffffff",
             "text_align": "vertical-center horizontal-left",
             "image": "shopify:\/\/shop_images\/Homepage-Banners-Outdoor_dfaf9b09-79f9-4d94-88a3-7176752fb6df.png",
-            "image_mobile": "shopify:\/\/shop_images\/Homepage-Banners-Mobile-1-w-Text.png",
             "overlay_opacity": 0,
             "focal_point": "center center"
           }
