@@ -45,12 +45,11 @@
         },
         "a18b8778-dac9-4bcc-870e-56d058692b80": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "top_subheading": "",
-            "title": "",
-            "title_size": 80,
-            "subheading": "",
+            "top_subheading": "Save Up To 10%",
+            "title": "Vosker V300-US Cellular Surveillance Camera",
+            "title_size": 50,
+            "subheading": "Buy Now",
             "chat_widget": false,
             "link": "https:\/\/www.vidlogix.com\/products\/vosker-v300",
             "link_text": "",
@@ -58,8 +57,8 @@
             "link_text_2": "",
             "color_accent": "rgba(0,0,0,0)",
             "text_color": "#000000",
-            "text_align": "vertical-center horizontal-center",
-            "image": "shopify:\/\/shop_images\/Homepage-Banners-Outdoor.png",
+            "text_align": "vertical-center horizontal-right",
+            "image": "shopify:\/\/shop_images\/Homepage-Banners-Desktop-1-wo-Text.png",
             "overlay_opacity": 0,
             "focal_point": "center center"
           }
