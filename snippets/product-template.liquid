@@ -295,13 +295,20 @@
                       </div>
                     {%- endif -%}
 
-                    {% comment %} new field added - am {% endcomment %}                       
+                    {% comment %}  new field added with tooltip - am{% endcomment %}
                     {%- if section.settings.condition_new != '' -%}
-                      <div class="product-single__vendor-sku">
-                        <div class="product-single__vendor-sku">
-                          <span>{{ section.settings.condition_new }}</span>
-                        </div>
-                      </div>
+                      <p class="condition-new" style="width:100%;">
+                        {% for variant in product.variants %}
+                          <span class="backorder-wrapper" {% if variant != current_variant %}style="display: none;"{% endif %}>
+                            {{ section.settings.condition_new }}
+                            <span class="tts tts-wrap tooltip-wrapper" aria-label="{{ settings.condition_new_tooltip }}">
+                              <a target="_blank" href="/pages\/extended-warranty" >
+                                <img aria-hidden="true" focusable="false" role="presentation" class="icon icon-tooltip tooltip-image" src="{{ settings.backstock_icon | img_url }}">
+                              </a>
+                            </span>
+                          </span>
+                        {% endfor %}
+                      </p>
                     {%- endif -%}
 
                   </div>
