@@ -301,8 +301,12 @@
                         {% for variant in product.variants %}
                           <span class="backorder-wrapper" {% if variant != current_variant %}style="display: none;"{% endif %}>
                             <span class="tts tts-wrap tooltip-wrapper " aria-label="{{ settings.condition_new_tooltip }}">
-                              <span>{{ section.settings.condition_new }}</span>
-                              <a target="_blank" href="/pages\/extended-warranty" >
+                              <a class="condition-new-desktop" target="_blank" href="/pages\/extended-warranty" >
+                                <span>{{ section.settings.condition_new }}</span>
+                                <img aria-hidden="true" focusable="false" role="presentation" class="icon icon-tooltip tooltip-image" src="{{ settings.backstock_icon | img_url }}">
+                              </a>
+                              <a class="condition-new-mobile">
+                                <span>{{ section.settings.condition_new }}</span>
                                 <img aria-hidden="true" focusable="false" role="presentation" class="icon icon-tooltip tooltip-image" src="{{ settings.backstock_icon | img_url }}">
                               </a>
                             </span>
