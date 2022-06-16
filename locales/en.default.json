@@ -374,7 +374,7 @@
       },
       "alternative_payment_method_banner": {
         "express_checkout": "Express checkout",
-        "or": "☝️ FREE 3-YR WARRANTY WITH SHOP PAY ORDER ☝️"
+        "or": "☝️ FREE 3-YR WARRANTY ON SHOP PAY ORDERS ☝️"
       },
       "thank_you": {
         "page_title": "Thank you, {{ display_name }}!",
