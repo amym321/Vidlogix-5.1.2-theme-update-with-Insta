@@ -374,7 +374,7 @@
       },
       "alternative_payment_method_banner": {
         "express_checkout": "Express checkout",
-        "or": "☝️FREE 3-YEAR EXTENDED WARRANTY WHEN YOU USE SHOP PAY ☝️"
+        "or": "☝️ FREE 3-YEAR EXTENDED WARRANTY WHEN YOU USE SHOP PAY ☝️"
       },
       "thank_you": {
         "page_title": "Thank you, {{ display_name }}!",
