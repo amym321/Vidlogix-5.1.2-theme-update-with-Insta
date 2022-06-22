@@ -12683,7 +12683,7 @@ html[dir=rtl] .product-single__meta .rte{
 
 @media only screen and (max-width: 768px) {
   .why-buy-popup .modal {
-    height:90%;
+    height:88%;
   }
 }
 
@@ -13031,14 +13031,6 @@ button#dummy-chat-button.chat-toggle {
   display: none !important;
 } */
 
-
-/* header & announcement bar above RV modal overlay-background element */
-/* #shopify-section-header, */
-.announcement-bar,
-.header-sticky-wrapper {
-  z-index: 25000 ;
-}
-
 /* native cart drawer */
 .cart-slider {
   text-align: center;
@@ -13050,7 +13042,21 @@ button#dummy-chat-button.chat-toggle {
   display: none;
 }
 
+/* header & announcement bar above RV modal overlay-background element */
+/* #shopify-section-header, */
+.announcement-bar,
+.header-sticky-wrapper {
+  z-index: 25000 ;
+}
+
 /* quiz for locks */
 .quizkit-popup {
   z-index: 60000 !important;
+}
+
+/* native modals mobile menu drawer, cart drawer, etc over header */
+.drawer, 
+.pswp,
+.modal {
+  z-index: 26000 ;
 }
