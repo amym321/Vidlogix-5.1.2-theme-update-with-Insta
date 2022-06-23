@@ -12956,7 +12956,7 @@ button#dummy-chat-button.chat-toggle {
 }
 
 /* backorder notification & variant messages*/
-.backorder-notification, 
+.backorder-notification,
 .backorder-message,
 .variant-message {
   text-align: center;
@@ -12964,19 +12964,34 @@ button#dummy-chat-button.chat-toggle {
 
 .condition-new {
   font-size: .9rem;
-  text-align: left;
+  text-align: left !important;
+  margin:0 0 15px !important;
 }
 
 @media only screen and (min-width: 769px) {
   .condition-new-mobile {
-    display:none;
+    display:none !important;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .condition-new-desktop {
-    display:none;
+    display:none !important;
   }
+}
+
+.icon-tooltip {
+  display:inline-block !important;
+}
+
+.condition-new-desktop, .condition-new-mobile,
+.tooltip-wrapper  a:after  {
+  border-bottom: none !important;
+}
+
+.modal__inner .product-single__sku {
+  margin: 0 !important;
+  padding: 0 3px; !important;
 }
 
 /* use this class with the Custom Content/HTML as a divider */
