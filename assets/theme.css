@@ -12967,36 +12967,3 @@ button#dummy-chat-button.chat-toggle {
     margin-top: 10px;
   }
 }
-
-/* SellerBird Bundle  */
-.sb-bundle-product-title a,
-.sb-bundle-product-title, 
-.sb-bundle-container .sb-bundle .sb-bundle-summary .sb-bundle-summary-left {
-  font-size: calc(var(--typeBaseSize) - 2px);
-  font-weight:700;
-  text-align: center;
-}
-.sb-bundle-container .sb-bundle .sb-bundle-summary .sb-bundle-summary-left {
-  font-size: 16px;
-}
-.sb-bundle-container.sb-theme3 .sb-bundle .sb-bundle-add {
-  border-radius: var(--buttonRadius) !important;
-  background-color: var(--colorBtnPrimary);
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  padding: 10px 25px;
-  height: 50px;
-}
-@media only screen and (min-width: 750px) {
-  .sb-bundle-container .sb-bundle {
-    grid-template-columns: 200px auto 290px !important;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .sb-bundle-container.sb-theme3 .sb-bundle .sb-bundle-add {
-    font-size: max(calc(var(--typeBaseSize) - 5px),11px);
-  }
-}
