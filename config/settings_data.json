@@ -64,6 +64,7 @@
     "product_hover_image": false,
     "backstock_intro": "Backorder — Dispatched",
     "backstock_tooltip": "This is the date we reasonably expect to have this product in stock based on anticipated demand, communications from the manufacturer, and other factors. This is a good faith estimate, not a guarantee. You may cancel an order at any time prior to shipment at no cost to you. Orders are fulfilled on a first-come-first-serve basis.",
+    "condition_new_tooltip": "Vidlogix does NOT sell gray market, open box, scratch & dent, or used items. Shop with confidence and enjoy the security of a free one (1) year Product Protection plan with every purchase.",
     "backstock_icon": "shopify:\/\/shop_images\/tooltip-icon.png",
     "enable_product_reviews": true,
     "collection_grid_style": "overlaid-box",
