@@ -64,7 +64,7 @@
     "product_hover_image": false,
     "backstock_intro": "Backorder — Dispatched",
     "backstock_tooltip": "This is the date we reasonably expect to have this product in stock based on anticipated demand, communications from the manufacturer, and other factors. This is a good faith estimate, not a guarantee. You may cancel an order at any time prior to shipment at no cost to you. Orders are fulfilled on a first-come-first-serve basis.",
-    "condition_new_tooltip": "Vidlogix only sells brand-new, unused, unopened, undamaged item is in its original packaging (where packaging is applicable). Packaging is the same as what is found in a retail store, unless the item is packaged by the manufacturer in non-retail packaging.",
+    "condition_new_tooltip": "New shall mean brand-new, unused, unopened, undamaged item is in its original packaging (where packaging is applicable). Packaging is the same as what is found in a retail store, unless the item is packaged by the manufacturer in non-retail packaging.",
     "backstock_icon": "shopify:\/\/shop_images\/tooltip-icon.png",
     "enable_product_reviews": true,
     "collection_grid_style": "overlaid-box",
