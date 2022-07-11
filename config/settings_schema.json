@@ -248,7 +248,7 @@
       {
         "type": "checkbox",
         "id": "button_chat",
-        "label": "Open chat widget. Defaults to Contact page for now",
+        "label": "Opens chat widget Help Scout Beacon",
         "default": true
       },
       {

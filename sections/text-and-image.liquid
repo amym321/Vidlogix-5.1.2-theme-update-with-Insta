@@ -83,11 +83,11 @@
           {%- endif -%}
           
           {% if section.settings.button_chat == true and section.settings.button_label != blank %}
-            <a href="/pages\/contact"  class="btn">
+            <a  href="#" onclick="Beacon('open');" class="btn">
               {{ section.settings.button_label }}
             </a>
-  
-          {% comment%} 'Why Buy Vidlogix' popup - am {% endcomment%}
+
+          {% comment%} JS NOT POPPING IT UP RIGHT NOW - 'Why Buy Vidlogix' popup - am.  {% endcomment%}
           {% elsif section.settings.button_popup == true and section.settings.button_label != blank %}
             <div id="why-buy-btn"  class=" btn">
               {{ section.settings.button_label }}
@@ -106,14 +106,20 @@
                 </div>
               </div>
             </div>
-  
-          {%- elsif section.settings.button_label != blank and section.settings.button_popup != true -%}
+
+          {%- elsif section.settings.button_label != blank 
+                    and section.settings.button_popup != true and section.settings.button_chat != true -%}
             <div class="appear-delay{% cycle '','-1','-2','-3','-4' %}">
-              <a href="{{ section.settings.button_link }}" class="btn{% if section.settings.button_style == 'secondary' %} btn--tertiary{% endif %}">
+              <a 
+                {% if section.settings.button_link != blank %} href="{{ section.settings.button_link }}" {% endif %}
+                class="btn{% if section.settings.button_style == 'secondary' %} btn--tertiary{% endif %}">
                 {{ section.settings.button_label }}
               </a>
             </div>
+
           {%- endif -%}
+
+
           {% if section.settings.disclaimer != blank %}
             <div class="feature-row__disclaimer">
               {{ section.settings.disclaimer }}
@@ -326,17 +332,18 @@
         },
         {
           "type": "checkbox",
+          "id": "button_chat",
+          "label": "Button opens chat widget Help Scout Beacon",
+          "default": false
+        },
+        {
+          "type": "checkbox",
           "id": "button_popup",
           "label": "Button opens Why Buy Vidlogix popup.",
           "default": false, 
           "info": "Button link must be blank for the popup to work."
         },
-        {
-          "type": "checkbox",
-          "id": "button_chat",
-          "label": "Button opens chat widget. Defaults to Contact page for now",
-          "default": false
-        },
+
         {
           "type": "richtext",
           "id": "disclaimer",

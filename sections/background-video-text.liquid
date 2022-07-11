@@ -39,21 +39,23 @@
                   {%- assign link_href = section.settings.video_url -%}
                 {%- endif -%}
 
+
                 {% if section.settings.button_chat == true %}
-                <a href="/pages\/contact"  class="btn">
+                  <a  href="#" onclick="Beacon('open');" class="btn">
                     {{ section.settings.button_label }}
                   </a>
                 {% else %}
-
-                <a href="{{ link_href }}" class="btn">
+                  <a href="{{ link_href }}" class="btn">
                   {%- if link_href contains 'youtube.com/watch' or link_href contains 'youtu.be/' -%}
                     <span style="padding-right: 5px;">
                       <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-play" viewBox="18.24 17.35 24.52 28.3"><path fill="#323232" d="M22.1 19.151v25.5l20.4-13.489-20.4-12.011z"/></svg>
                     </span>
                   {%- endif -%}
-                  {{ section.settings.button_label }}
-                </a>
+                    {{ section.settings.button_label }}
+                  </a>
                 {% endif %}
+
+
               {%- endif -%}
             </div>
           </div>
@@ -102,7 +104,7 @@
       {
         "type": "checkbox",
         "id": "button_chat",
-        "label": "Open chat widget. Defaults to Contact page for now",
+        "label": "Button opens chat widget Help Scout Beacon",
         "default": false
       },
       {
