@@ -64,8 +64,8 @@
         "button_link": "",
         "button_style": "primary",
         "align_text": "center",
-        "button_popup": false,
         "button_chat": false,
+        "button_popup": false,
         "disclaimer": "",
         "background_color": "#f2f2f2",
         "text_color": "",
@@ -149,7 +149,7 @@
           "type": "text",
           "settings": {
             "enlarge_text": false,
-            "text": "<p>Vidlogix Inc.<br\/>445 Furrows Rd<br\/>Holbrook, NY 11741<br\/><a href=\"tel:12124315086\" title=\"tel:12124315086\">(212) 431-5086<\/a><\/p><p>For order inquires, please contact us at:<br\/><a href=\"mailto:hello@vidlogix.com\" title=\"mailto:hello@vidlogix.com\"><strong>hello@vidlogix.com<\/strong><\/a><\/p><p>For press inquiries, please contact us at:<br\/><a href=\"mailto:press@vidlogix.com\" title=\"mailto:press@vidlogix.com\"><strong>press@vidlogix.com<\/strong><\/a><\/p><p>For legal inquiries, please contact us at:<br\/><a href=\"mailto:legal@vidlogix.com\" title=\"mailto:legal@vidlogix.com\"><strong>legal@vidlogix.com<\/strong><\/a><\/p>"
+            "text": "<p>Vidlogix HQ<br\/>160 Varick St.<br\/>NY, NY 10013<br\/><a href=\"tel:12124315086\" title=\"tel:12124315086\">(212) 431-5086<\/a><\/p><p>For order inquires, please contact us at:<br\/><a href=\"mailto:hello@vidlogix.com\" title=\"mailto:hello@vidlogix.com\"><strong>hello@vidlogix.com<\/strong><\/a><\/p><p>For press inquiries, please contact us at:<br\/><a href=\"mailto:press@vidlogix.com\" title=\"mailto:press@vidlogix.com\"><strong>press@vidlogix.com<\/strong><\/a><\/p><p>For legal inquiries, please contact us at:<br\/><a href=\"mailto:legal@vidlogix.com\" title=\"mailto:legal@vidlogix.com\"><strong>legal@vidlogix.com<\/strong><\/a><\/p>"
           }
         }
       },
