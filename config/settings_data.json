@@ -32,7 +32,7 @@
     "help_image": "shopify:\/\/shop_images\/help-icon_140x140_9c02dbce-0ac6-4879-8d5b-6834e8c8b094.png",
     "help_text_bold": "Need Help?",
     "help_text": "Contact us",
-    "button_chat": false,
+    "button_chat": true,
     "help_link": "shopify:\/\/pages\/contact",
     "type_header_font_family": "open_sans_n6",
     "type_header_spacing": "0",

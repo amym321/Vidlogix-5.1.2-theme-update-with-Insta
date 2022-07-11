@@ -142,7 +142,7 @@
         "text": "<p>Curious about our products or not sure what you need? Talk to one of our smart home specialists anytime. It’s free.<\/p>",
         "button_label": "Get Help",
         "button_link": "shopify:\/\/pages\/contact",
-        "button_chat": false,
+        "button_chat": true,
         "video_url": "https:\/\/vimeo.com\/434829420",
         "color_border": "#f4f4f4",
         "layout": "left",
