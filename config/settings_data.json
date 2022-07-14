@@ -188,9 +188,9 @@
               "show_email": true,
               "email_text": "hello@vidlogix.com",
               "show_phone": true,
-              "phone_text": "203-572-5079 (tech)",
-              "show_phone_text": false,
-              "phone_text_text": "289-797-3165",
+              "phone_text": "1-203-572-5079",
+              "show_phone_text": true,
+              "phone_text_text": "1-203-548-7310",
               "container_width": 40
             }
           },
