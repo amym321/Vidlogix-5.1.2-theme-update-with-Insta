@@ -101,7 +101,11 @@
         "thumbnail_arrows": true,
         "mobile_layout": "partial",
         "enable_video_looping": true,
-        "product_video_style": "unmuted"
+        "product_video_style": "unmuted",
+        "enable_dp": true,
+        "dp_heading": "Frequently Bought Together",
+        "dp_heading_default": false,
+        "dp_quickview_enabled": true
       }
     },
     "sub": {
