@@ -1,0 +1,24 @@
+{% comment %} Do not remove the data attributes {% endcomment %}
+<div class="package__product" data-product>
+  <picture class="package__product-media-container">
+    <img class="package__product-image" src="{{ product | image_url: width: '500' }}" alt="{{ product.featued_image.alt | escape }}" data-product-image>
+    <input type="checkbox" class="package__checkbox" aria-label="Include {{ product.title }} in package" data-product-checkbox>
+
+    {%- if quickview_enabled != blank -%}
+      <button class="package__quickview btn" type="button" data-product-quickview>Quick view</button>
+    {%- endif -%}
+  </picture>
+
+  <p class="package__product-title" data-product-title>{{ product.title }}</p>
+
+  <p class="package__product-price" data-product-price>{{ product.variants[0].price }}</p>
+
+  <div class="package__quantity-selector">
+    <button class="package__quantity-toggle package__quantity-toggle--minus" data-quantity-toggle="-1" type="button">-</button>
+    <input class="package__quantity" type="number" min="1" value="1" data-quantity disabled>
+    <button class="package__quantity-toggle package__quantity-toggle--plus" data-quantity-toggle="1" type="button">+</button>
+  </div>
+
+  <select class="package__variant-selection" data-product-variant-selector disabled></select>
+  <input type="hidden" name="items[{{ product.variants[0].id }}]" value="1" data-add-input disabled>
+</div>
