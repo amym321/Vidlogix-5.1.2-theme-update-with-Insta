@@ -506,6 +506,16 @@
           </div>
         {%- endunless -%}
       </div>
+
+      {% comment %} Discount Packages {% endcomment %}
+      {%- if enable_dp != blank and template.suffix != 'modal' -%}
+        {%- render 'discount-packages-product-template', 
+          product: product
+          heading: dp_heading,
+          heading_default: dp_heading_default,
+          quickview_enabled: dp_quickview_enabled
+        -%}
+      {%- endif -%}
       
       {% comment %} Media Drawer for iframe of user manuals etc - am {% endcomment %}
       {% render 'media-drawer' %}
