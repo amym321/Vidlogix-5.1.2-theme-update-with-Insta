@@ -1,0 +1,25 @@
+{% comment %} 
+  Parameters:
+  - package:  A shopify collection object
+{% endcomment %}
+{%- capture products -%}
+[
+  {%- for _product in package.products -%}
+    {{ _product | json }}
+    {%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+]
+{%- endcapture -%}
+{%- assign discount = package.metafields.packages.discount.value -%}
+{
+  "title": {{ package.title | json }},
+  "itemCount": {{ package.all_products_count | json }},
+  "products": {{ products }},
+  "discount": {
+    "enabled": {{ discount.enabled | json }},
+    "type": {{ discount.type | json }},
+    "value": {{ discount.value | json }},
+    "min_quantity": {{ discount.min_quantity | json }},
+    "code": {{ discount.code | json }}
+  }
+}
