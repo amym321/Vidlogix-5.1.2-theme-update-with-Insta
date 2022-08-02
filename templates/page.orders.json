@@ -20,7 +20,7 @@
           "type": "text",
           "settings": {
             "enlarge_text": false,
-            "text": "<p>Vidlogix accepts Visa, MasterCard, American Express, Discover, Shop Pay, Shop Pay Installments, and Apple Pay. You will be charged for your order upon shipment or within seven calendar days. You may cancel an order at any time before shipment. Once you receive a shipping notification we are unable to update addresses. Orders over $500 require a signature.<\/p>"
+            "text": "<p>Vidlogix accepts Visa, MasterCard, Discover, Shop Pay, and Apple Pay. You will be charged for your order upon shipment or within seven calendar days. You may cancel an order at any time before shipment. Once you receive a shipping notification we are unable to update addresses. Orders over $500 require a signature.<\/p>"
           }
         }
       },
@@ -42,7 +42,7 @@
             "title": "Payment methods",
             "map_text": "",
             "map_popup": false,
-            "text": "<p>We accept Visa, Mastercard, American Express, Discover, Shop Pay, Shop Pay Installments, and Apple Pay.<\/p><p><strong>We may contact your bank to verify if the billing address and phone number entered on Vidlogix.com match the address where your credit card company sends your statements to protect you from unauthorized purchases.<\/strong><\/p>",
+            "text": "<p>We accept Visa, Mastercard, Discover, Shop Pay, Shop Pay, and Apple Pay.<\/p><p><strong>We may contact your bank to verify if the billing address and phone number entered on Vidlogix.com match the address where your credit card company sends your statements to protect you from unauthorized purchases.<\/strong><\/p>",
             "button_link2": "",
             "button_text2": "Button text",
             "button_chat2": false,
