@@ -13,7 +13,6 @@ class DiscountPackages extends HTMLElement {
     this.appendChild(templateElement);
     
     const data = JSON.parse(this.getAttribute('package'));
-    console.log('data', data)
     const currentProductId = JSON.parse(this.getAttribute('product-id'));
 
     this.products = data.products.sort((a, b) => {
@@ -43,7 +42,7 @@ class DiscountPackages extends HTMLElement {
       }
     ];
     
-    // this.removeAttribute('package');
+    this.removeAttribute('package');
 
     this.querySelector('.package__add-to-cart').addEventListener('click', (event) => {
       this.addToCart(event);
@@ -222,8 +221,7 @@ class DiscountPackages extends HTMLElement {
       body: JSON.stringify({ items }),
     })
     .then((res) => res.json())
-    .then((res) => console.log(res))
-    // .then((res) => { window.location = window.theme.routes.cartPage })
+    .then((res) => { window.location = window.theme.routes.cartPage })
     .catch(console.error); 
   }
 
@@ -286,11 +284,8 @@ class DiscountPackages extends HTMLElement {
   }
 
   connectedCallback() {
-    // this.render();
     document.addEventListener('DOMContentLoaded', () => this.render());
   }
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
-  window.customElements.define('discount-packages', DiscountPackages);
-// });
+window.customElements.define('discount-packages', DiscountPackages);
