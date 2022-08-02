@@ -1,0 +1,79 @@
+{%- liquid
+  assign has_package = false
+  for tag in product.tags
+    if tag contains '_package_item:'
+      assign package_collection_handle = tag | remove: '_package_item:'
+      assign package_collection = collections[package_collection_handle]
+      if package_collection.title != blank
+        assign has_package = true
+        break
+      endif
+    endif
+  endfor
+-%}
+
+{%- if has_package -%}
+  {%- capture products_json -%}{%- render 'discount-packages-json', package: package_collection -%}{%- endcapture -%}
+  <section class="package__page-width page-width">
+    {%- if heading != blank -%}
+      <h2 class="package__heading">{{ heading }}</h2>
+    {% elsif heading_default != blank %}
+      <h2 class="package__heading">{{ package_collection.title }}</h2>
+    {%- endif -%}
+    <discount-packages
+      product-id="{{ product.id }}"
+      package="{{ products_json | escape }}"
+    ></discount-packages>
+
+    {%- if quickview_enabled != blank -%}  
+      {%- for _product in package_collection.products -%}
+        {%- render 'quick-shop-modal', product: _product -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </section>
+
+  <template id="dp-product">
+    {%- render 'discount-packages-product', quickview_enabled: quickview_enabled -%}
+  </template>
+
+  <template id="dp-template">
+    <form class="package__container" action="/cart/add" method="post">
+      {% comment %} Primary product {% endcomment %}
+      <div class="package__product-single" data-product-single></div>
+
+      {% comment %} Product list {% endcomment %}
+      <div class="package__product-list" data-product-list></div>
+
+      <div class="package__checkout">
+        {%- if package_collection.description != blank -%}
+          <div class="package__description">{{ package_collection.description }}</div>
+        {%- endif -%}
+
+        {%- if package_collection.metafields.packages.discount.value.enabled -%}
+          <div class="package__info package__info--discount">
+            <p class="package__info-label">Discount <span class="package__discount" data-package-discount>{% comment %} Discount value {% endcomment %}</span></p>
+            <p class="package__info-value package__total-compare">{% comment %} Compare price {% endcomment %}</p>
+          </div>
+        {%- endif -%}
+
+        {%- if package_collection.metafields.packages.discount.value.min_quantity > 1 -%}
+          <div class="package__info package__info--minimum hide">
+            <div class="package__info-label package__minimum">Minimum {{ package_collection.metafields.packages.discount.value.min_quantity }} items</div>
+          </div>
+        {%- endif -%}
+
+        <div class="package__info package__info--total">
+          <div class="package__info-label">
+            <span class="package__item-count" data-count="1">1</span>
+          </div>
+          <p class="package__info-value package__total-amount">{% comment %} Final price {% endcomment %}</p>
+        </div>
+
+        <button class="package__add-to-cart btn" type="submit">Add package to cart</button>
+      </div>
+    </form>
+  </template>
+
+  {{ 'discount-packages.min.css' | asset_url | stylesheet_tag }}
+  {{ 'discount-packages-min.js' | asset_url | script_tag }}
+{%- endif -%}
