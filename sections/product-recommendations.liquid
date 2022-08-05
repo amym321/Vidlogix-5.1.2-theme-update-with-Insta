@@ -27,7 +27,9 @@
 
 -%}
 
-<!-- *** DESELECT RECOMMENDED ACCORDION IN THEME CUSTOMIZER - FREQUENTLY BOUGHT TOGETHER REPLACES IT - am *** -->
+<!-- *** Freguently Bought Together uses trigger  in customizer. 
+  No longer using Recommended accordion - am *** -->
+{% comment %}
 {%- if section.settings.show_product_recommendations -%}
   <div
     id="Recommendations-{{ product.id }}"
@@ -55,18 +57,15 @@
         <div class="grid-overflow-wrapper">
           {%- if recommend_products -%}
             <div class="product-recommendations-placeholder">
-              {% comment %}
-                This content is visually hidden and replaced when recommended products show up
-              {% endcomment %}
+                <!-- This content is visually hidden and replaced when recommended products show up -->
               <div class="grid grid--uniform visually-invisible" aria-hidden="true">
                 {%- render 'product-grid-item', product: product, grid_item_width: grid_item_width -%}
               </div>
             </div>
           {%- endif -%}
           {%- if related_collection.products_count > 1 -%}
-            {% comment %} removed liquid so that PDP changes per 4.1.1 work {% endcomment %}
-            {% comment %}
-              case number_of_products
+             <!-- removed liquid so that PDP changes per 4.1.1 work  -->
+              <!-- case number_of_products
                 when 1
                   assign grid_item_width = ''
                 when 2
@@ -79,12 +78,11 @@
                   assign grid_item_width = 'small--one-half medium-up--one-fifth'
                 when 6
                   assign grid_item_width = 'small--one-half medium-up--one-sixth'
-              endcase
-            {% endcomment %}
+              endcase -->
             <div class="product-recommendations">
               <div class="grid flex-grid grid--uniform" data-aos="overflow__animation">
 
-                {% comment %} added so that PDP changes per 4.1.1 work {% endcomment %}
+                <!-- dded so that PDP changes per 4.1.1 work  -->
                 {%- liquid
                   assign protection_product = settings.protection_product
                   assign current_product = product
@@ -96,7 +94,7 @@
                 
                 {%- for product in related_collection.products limit: number_of_products -%}
 
-                  {% comment %}CODE FOR RULING OUT ACCESSORIES per 4.1.1 {% endcomment %}
+                  <!-- CODE FOR RULING OUT ACCESSORIES per 4.1.1  -->
                   {% assign accessory_product_found = false %}
                   {% for tag in current_product.tags %}
                     {% if tag contains 'v-accessory-'%}
@@ -125,6 +123,8 @@
     </div>
   </div>
 {%- endif -%}
+{% endcomment %}
+
 
 {% schema %}
   {
