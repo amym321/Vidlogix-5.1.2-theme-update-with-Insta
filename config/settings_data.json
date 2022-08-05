@@ -153,7 +153,7 @@
         ],
         "settings": {
           "main_menu_link_list": "main-menu",
-          "mega_menu_images": false,
+          "mega_menu_images": true,
           "main_menu_alignment": "center",
           "header_style": "sticky",
           "sticky_index": false,
