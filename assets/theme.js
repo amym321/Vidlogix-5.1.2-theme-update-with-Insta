@@ -5638,88 +5638,90 @@ lazySizesConfig.expFactor = 4;
   })();
   // end code change per 4.1.1 customization
   
-  theme.Recommendations = (function() {
-    var selectors = {
-      placeholder: '.product-recommendations-placeholder',
-      sectionClass: ' .product-recommendations',
-      productResults: '.grid-product'
-    }
+
+  // *** REMOVE RECOMMENDED ACCORDION - FREQUENTLY BOUGHT TOGETHER REPLACES IT - am ***
+  // theme.Recommendations = (function() {
+  //   var selectors = {
+  //     placeholder: '.product-recommendations-placeholder',
+  //     sectionClass: ' .product-recommendations',
+  //     productResults: '.grid-product'
+  //   }
   
-    function Recommendations(container) {
-      this.container = container;
-      this.sectionId = container.getAttribute('data-section-id');
-      this.url = container.dataset.url;
+  //   function Recommendations(container) {
+  //     this.container = container;
+  //     this.sectionId = container.getAttribute('data-section-id');
+  //     this.url = container.dataset.url;
   
-      selectors.recommendations = 'Recommendations-' + this.sectionId;
+  //     selectors.recommendations = 'Recommendations-' + this.sectionId;
   
-      theme.initWhenVisible({
-        element: container,
-        callback: this.init.bind(this),
-        threshold: 500
-      });
-    }
+  //     theme.initWhenVisible({
+  //       element: container,
+  //       callback: this.init.bind(this),
+  //       threshold: 500
+  //     });
+  //   }
   
-    Recommendations.prototype = Object.assign({}, Recommendations.prototype, {
-      init: function() {
-        var section = document.getElementById(selectors.recommendations);
+  //   Recommendations.prototype = Object.assign({}, Recommendations.prototype, {
+  //     init: function() {
+  //       var section = document.getElementById(selectors.recommendations);
   
-        if (!section || section.dataset.enable === 'false') {
-          return;
-        }
+  //       if (!section || section.dataset.enable === 'false') {
+  //         return;
+  //       }
   
-        var id = section.dataset.productId;
-        var limit = section.dataset.limit;
+  //       var id = section.dataset.productId;
+  //       var limit = section.dataset.limit;
   
-        var url = this.url + '?section_id=product-recommendations&limit='+ limit +'&product_id=' + id;
+  //       var url = this.url + '?section_id=product-recommendations&limit='+ limit +'&product_id=' + id;
   
-        // When section his hidden and shown, make sure it starts empty
-        if (Shopify.designMode) {
-          var wrapper = section.querySelector(selectors.sectionClass)
-          if (wrapper) {
-            wrapper.innerHTML = '';
-          }
-        }
+  //       // When section his hidden and shown, make sure it starts empty
+  //       if (Shopify.designMode) {
+  //         var wrapper = section.querySelector(selectors.sectionClass)
+  //         if (wrapper) {
+  //           wrapper.innerHTML = '';
+  //         }
+  //       }
   
-        fetch(url).then(function(response) {
-          return response.text();
-        }).then(function(html) {
-          // Convert the HTML string into a document object
-          var parser = new DOMParser();
-          var doc = parser.parseFromString(html, 'text/html');
-          var div = doc.querySelector(selectors.sectionClass);
-          var placeholder = section.querySelector(selectors.placeholder);
-          if (!placeholder) {
-            return;
-          }
+  //       fetch(url).then(function(response) {
+  //         return response.text();
+  //       }).then(function(html) {
+  //         // Convert the HTML string into a document object
+  //         var parser = new DOMParser();
+  //         var doc = parser.parseFromString(html, 'text/html');
+  //         var div = doc.querySelector(selectors.sectionClass);
+  //         var placeholder = section.querySelector(selectors.placeholder);
+  //         if (!placeholder) {
+  //           return;
+  //         }
   
-          placeholder.innerHTML = '';
+  //         placeholder.innerHTML = '';
   
-          if (!div) {
-            this.container.classList.add('hide');
-            return;
-          }
+  //         if (!div) {
+  //           this.container.classList.add('hide');
+  //           return;
+  //         }
   
-          placeholder.appendChild(div);
+  //         placeholder.appendChild(div);
   
-          theme.reinitProductGridItem(section);
+  //         theme.reinitProductGridItem(section);
   
-          document.dispatchEvent(new CustomEvent('recommendations:loaded', {
-            detail: {
-              section: section
-            }
-          }));
+  //         document.dispatchEvent(new CustomEvent('recommendations:loaded', {
+  //           detail: {
+  //             section: section
+  //           }
+  //         }));
   
-          // If no results, hide the entire section
-          var results = div.querySelectorAll(selectors.productResults);
-          if (results.length === 0) {
-            this.container.classList.add('hide');
-          }
-        }.bind(this));
-      }
-    });
+  //         // If no results, hide the entire section
+  //         var results = div.querySelectorAll(selectors.productResults);
+  //         if (results.length === 0) {
+  //           this.container.classList.add('hide');
+  //         }
+  //       }.bind(this));
+  //     }
+  //   });
   
-    return Recommendations;
-  })();
+  //   return Recommendations;
+  // })();
   
   theme.SlideshowSection = (function() {
   

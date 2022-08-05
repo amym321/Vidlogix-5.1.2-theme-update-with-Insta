@@ -671,6 +671,8 @@
           {% endif %}
 
            <!-- RECOMMENDED PRODUCTS ACCORDION -->
+          <!-- *** REMOVE RECOMMENDED ACCORDION - FREQUENTLY BOUGHT TOGETHER REPLACES IT - am *** -->
+          {% comment %}
           <div class="accordion opened opened-default recommended-products" id="recommended"><span class="accordion-title">Recommended</span> <span class="icon"></span></div>
           <div class="container" id="prod-recommended">
             <div class="content rte">
@@ -732,10 +734,7 @@
                       <div class="grid-overflow-wrapper">
                         {%- if recommend_products -%}
                           <div class="product-recommendations-placeholder">
-                            {% comment %}
-                              This content is visually hidden and replaced when recommended
-                              products show up
-                            {% endcomment %}
+                              <!-- This content is visually hidden and replaced when recommended products show up -->
                             <div class="grid grid--uniform visually-invisible" aria-hidden="true">
                               {%- render 'product-grid-item', product: product, grid_item_width: grid_item_width -%}
                             </div>
@@ -786,6 +785,7 @@
 
             </div>
           </div>
+          {% endcomment %}
 
         </div>
       {% endunless %}
