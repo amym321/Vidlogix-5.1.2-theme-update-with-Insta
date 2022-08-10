@@ -2062,11 +2062,17 @@ lazySizesConfig.expFactor = 4;
       // If we are in a nested collapsible element like the mobile nav,
       // also set the parent element's height
       if (parentCollapsibleEl) {
-        var totalHeight = isOpen
-                          ? parentCollapsibleEl.offsetHeight - childHeight
-                          : height + parentCollapsibleEl.offsetHeight;
+        var parentHeight = parentCollapsibleEl.style.height;
   
-        setTransitionHeight(parentCollapsibleEl, totalHeight, false, false);
+        if (isOpen && parentHeight === 'auto') {
+          childHeight = 0; // Set childHeight to 0 if parent is initially opened
+        }
+  
+          var totalHeight = isOpen
+                            ? parentCollapsibleEl.offsetHeight - childHeight
+                            : height + parentCollapsibleEl.offsetHeight;
+    
+          setTransitionHeight(parentCollapsibleEl, totalHeight, false, false);
       }
   
       // If Shopify Product Reviews app installed,
