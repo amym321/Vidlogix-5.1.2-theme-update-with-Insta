@@ -2,7 +2,6 @@
   "sections": {
     "1638402140320849a6": {
       "type": "promo-grid",
-      "disabled": true,
       "blocks": {
         "9a9f3525-d3f4-4e3e-b463-cd49f39d935f": {
           "type": "banner",
@@ -15,10 +14,24 @@
             "color_tint_opacity": 20,
             "framed": false
           }
+        },
+        "7a7db5bd-6b1c-4dd6-97f2-cf1b6e4d2f13": {
+          "type": "banner",
+          "disabled": true,
+          "settings": {
+            "heading": "",
+            "text": "Shop Pay",
+            "link": "",
+            "label": "",
+            "color_tint": "#838383",
+            "color_tint_opacity": 20,
+            "framed": false
+          }
         }
       },
       "block_order": [
-        "9a9f3525-d3f4-4e3e-b463-cd49f39d935f"
+        "9a9f3525-d3f4-4e3e-b463-cd49f39d935f",
+        "7a7db5bd-6b1c-4dd6-97f2-cf1b6e4d2f13"
       ],
       "settings": {
         "full_width": true,
@@ -139,35 +152,6 @@
     "1637459177d4db9b86": {
       "type": "apps",
       "disabled": true,
-      "blocks": {
-        "1e4f3eac-b324-47e9-bef3-5c3f54aac34e": {
-          "type": "shopify:\/\/apps\/junip-product-reviews-ugc\/blocks\/junip-product-review\/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
-          "settings": {
-            "product": "{{product}}"
-          }
-        },
-        "a5ee3dbc-e450-4bb5-8672-2dde0638a1ba": {
-          "type": "shopify:\/\/apps\/junip-product-reviews-ugc\/blocks\/junip-product-summary\/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
-          "settings": {
-            "product": "{{product}}"
-          }
-        },
-        "0c547bcd-0956-4f89-8c0f-49720a677b46": {
-          "type": "shopify:\/\/apps\/junip-product-reviews-ugc\/blocks\/junip-reviews\/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
-          "settings": {
-            "layout": "list",
-            "reviewsType": "all",
-            "showSummary": true,
-            "reviewsCount": 10,
-            "containerClass": ""
-          }
-        }
-      },
-      "block_order": [
-        "1e4f3eac-b324-47e9-bef3-5c3f54aac34e",
-        "a5ee3dbc-e450-4bb5-8672-2dde0638a1ba",
-        "0c547bcd-0956-4f89-8c0f-49720a677b46"
-      ],
       "settings": {
         "full_width": false,
         "space_around": true

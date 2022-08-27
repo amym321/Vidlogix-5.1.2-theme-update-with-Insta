@@ -307,12 +307,6 @@
 
     ],
     "blocks": {
-      "16017602894386113438": {
-        "type": "shopify:\/\/apps\/junip-product-reviews-ugc\/blocks\/junip-store-key\/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
-        "disabled": false,
-        "settings": {
-        }
-      },
       "8232603958289840080": {
         "type": "shopify:\/\/apps\/seo-manager\/blocks\/seomanager-404\/c54c366f-d4bb-4d52-8d2f-dd61ce8e7e12",
         "disabled": false,
